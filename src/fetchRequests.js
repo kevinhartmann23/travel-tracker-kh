@@ -81,7 +81,14 @@ let fetchRequests = {
       .then(response => response.json())
       .then(message => console.log(message))
       .catch(error => console.log(error))
-  }
+  },
+
+  deleteSingleTrip(id){
+    return fetch(`http://localhost:3001/api/v1/trips/${id}`, {method: "DELETE"})
+      .then(response => response.json())
+      .then(message => console.log(message))
+      .catch(error => console.log(error))
+  },
 
 
 }
