@@ -10,9 +10,31 @@ import './images/turing-logo.png'
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
-window.onload = fetchRequests.retrieveAllData();
+let allUsers, destinationData, tripData;
+
+window.onload = retrieveAllData();
 
 // fetchRequests.updateData("http://localhost:3001/api/v1/trips", fetchRequests.addTripObj)
 // fetchRequests.updateData("http://localhost:3001/api/v1/destinations", fetchRequests.addDesitnationObj)
 // fetchRequests.updateData("http://localhost:3001/api/v1/updateTrip", fetchRequests.changeTripStatusObj)
 // fetchRequests.deleteSingleTrip(4)
+
+function retrieveAllData(){
+  return Promise.all([
+    fetchRequests.getAllUserData(),
+    fetchRequests.getAllDestinationData(),
+    fetchRequests.getAllTripData()
+  ])
+    .then(data => {
+      allUsers = data[0].travelers;
+      destinationData = data[1].destinations;
+      tripData = data[2].trips;
+      showData();
+    })
+    .catch(error => console.log(error))
+}
+
+function showData(){
+  console.log(allUsers, destinationData, tripData)
+  console.log(allUsers[23], destinationData[12], tripData[24])
+}
