@@ -11,3 +11,7 @@ import './images/turing-logo.png'
 console.log('This is the JavaScript entry file - your code begins here.');
 
 window.onload = fetchRequests.retrieveAllData();
+
+fetchRequests.updateData("http://localhost:3001/api/v1/trips", fetchRequests.addTripObj)
+fetchRequests.updateData("http://localhost:3001/api/v1/destinations", fetchRequests.addDesitnationObj)
+fetchRequests.updateData("http://localhost:3001/api/v1/updateTrip", fetchRequests.changeTripStatusObj)
