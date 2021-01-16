@@ -5,6 +5,10 @@ class Agency {
     this.possibleDestinations = destinationData;
   }
 
+  filterTripsByCustomerID(id) {
+    return this.bookedTrips.filter(trip => trip.userID === id)
+  }
+
   findCustomerbyInfo(info) {
     let result;
     if (typeof info === 'string') {
@@ -21,12 +25,20 @@ class Agency {
 
   }
 
-  filterTripsByCustomerID(id) {
-    return this.bookedTrips.filter(trip => trip.userID === id)
+  displayDestinationNames(){
+    return this.possibleDestinations.map(dest => dest.destination)
   }
 
-  filterTripsByStatus(status) {
-    return this.bookedTrips.filter(trip => trip.status === status)
+  addNewDestination(destID, location, lodgingCost, flightCostPerPerson, imageURL, altText){
+    let newDestination = {
+      id: destID,
+      destination: location,
+      estimatedLodgingCostPerDay: lodgingCost,
+      estimatedFlightCostPerPerson: flightCostPerPerson,
+      image: imageURL,
+      alt: altText,
+    }
+    return newDestination
   }
 
   calculateTripCost(tripID) {
@@ -44,8 +56,45 @@ class Agency {
     return costData;
   }
 
-  calculateTotalSpent(userID){
-    let customer = this.customers.find(person => person.id === userID)
+  calculateCustomerTotalYearExpense(userID, year){
+    let customerTrips = this.filterTripsByCustomerID(userID)
+    let filteredTripsByYear = customerTrips.filter(trip => trip.date.slice(0,4) === year)
+    return filteredTripsByYear.reduce((acc, trip) => {
+      let costData = this.calculateTripCost(trip.id)
+      acc += Number(costData.total)
+      return acc;
+    }, 0)
+  }
+
+  determineEndDateByDuration(tripID){
+    let bookedTrip = this.bookedTrips.find(trip => trip.id === tripID)
+    let startDate = Date.parse(bookedTrip.date)
+    let milisecondsPerDay = 86400000
+    let timeAway = bookedTrip.duration * milisecondsPerDay
+    let endDate = new Date(startDate + timeAway)
+    return this.convertDate(endDate)
+  }
+
+  convertDate(date){
+    let newDate = new Date(date)
+    let year = newDate.getFullYear()
+    let month = newDate.getMonth() + 1
+    let day = newDate.getDate()
+    if (day < 10){
+      day = '0' + day
+    }
+    if (month < 10){
+      month = '0' + month
+    }
+    return year + '/' + month + '/' + day;
+  }
+
+  determineDurationByEndDate(startDate, endDate){
+    let milisecondsPerDay = 86400000
+    let returnDate = Date.parse(endDate)
+    let departDate = Date.parse(startDate)
+    let duration = (returnDate - departDate) / milisecondsPerDay
+    return duration
   }
 }
 

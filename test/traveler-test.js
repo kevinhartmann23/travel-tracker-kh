@@ -57,7 +57,7 @@ describe.only('Traveler', () => {
         userID: 2,
         destinationID: 1,
         travelers: 6,
-        date: '2021/02/07',
+        date: '2021/02/09',
         duration: 4,
         status: 'approved',
         suggestedActivities: []
@@ -97,7 +97,6 @@ describe.only('Traveler', () => {
 
   it('should be able to book a new trip', () => {
     let newIndex = newTraveler.scheduledTrips.length
-    console.log(newIndex)
     let newTrip = {
       "id": 21,
       "userID": 2,

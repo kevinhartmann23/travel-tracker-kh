@@ -7,7 +7,7 @@ import Agency from './agency.js';
 import Traveler from './traveler.js';
 import Trip from './trip.js';
 import Destination from './destination.js';
-import Admin from './admin.js'
+import Agent from './agent.js'
 
 import fetchRequests from './fetchRequests.js';
 
