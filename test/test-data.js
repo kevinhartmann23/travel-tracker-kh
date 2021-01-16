@@ -192,7 +192,7 @@ let travelers = [
     }, {
       "id": 4,
       "userID": 12,
-      "destinationID": 14,
+      "destinationID": 4,
       "travelers": 2,
       "date": "2020/02/25",
       "duration": 10,
@@ -230,7 +230,7 @@ let travelers = [
       "userID": 2,
       "destinationID": 1,
       "travelers": 6,
-      "date": "2021/02/07",
+      "date": "2021/02/09",
       "duration": 4,
       "status": "approved",
       "suggestedActivities": []

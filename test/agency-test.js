@@ -36,6 +36,21 @@ describe.only('Agency & Agent', () => {
     expect(agent.possibleDestinations).to.deep.equal(destinations)
   });
 
+  it('should display all destination names', () => {
+    expect(travelAgency.displayDestinationNames()).to.deep.equal([
+      'Lima, Peru',
+      'Stockholm, Sweden',
+      'Sydney, Austrailia',
+      'Cartagena, Colombia',
+      'Madrid, Spain',
+      'Jakarta, Indonesia',
+      'Paris, France',
+      'Tokyo, Japan',
+      'Amsterdam, Netherlands',
+      'Toronto, Canada'
+    ])
+  })
+
   it('should calculate the cost of a single trip plus 10% agency fee', () => {
     expect(travelAgency.calculateTripCost(12)).to.deep.equal({
       subtotal: 6480,
@@ -71,7 +86,7 @@ describe.only('Agency & Agent', () => {
         userID: 2,
         destinationID: 1,
         travelers: 6,
-        date: '2021/02/07',
+        date: '2021/02/09',
         duration: 4,
         status: 'approved',
         suggestedActivities: []
@@ -172,7 +187,9 @@ describe.only('Agency & Agent', () => {
   });
 
   it('should calculate the cost of total spent by a customer', () => {
-    expect(travelAgency.calculateCustomerTotalYearExpense(2)).to.equal(21906.5)
+    expect(travelAgency.calculateCustomerTotalYearExpense(5, "2020")).to.equal(7095.00)
+    expect(travelAgency.calculateCustomerTotalYearExpense(5, "2021")).to.equal(0)
+    expect(travelAgency.calculateCustomerTotalYearExpense(5, "2019")).to.equal(3344.00)
   });
 
 /////////////////////////AGENT ONLY TEST///////////////////////////////////////
@@ -214,9 +231,9 @@ it('should filter trips by status', () => {
 });
 
   it('should be able to change the status of a travlers trip by id', () => {
-    expect(agent.changeTripStatus(2, "approve", ["Horseback Ride", "Snorkel", "Mix it up with the locals"])).to.equal({
+    expect(agent.changeTripStatusAndActivities(3, "approved", ["Horseback Ride", "Snorkel", "Mix it up with the locals"])).to.deep.equal({
       id: 3,
-      status: "pending",
+      status: "approved",
       suggestedActivities: ["Horseback Ride", "Snorkel", "Mix it up with the locals"]
     })
   });
@@ -225,11 +242,52 @@ it('should filter trips by status', () => {
     expect(agent.viewAllBookedTrips()).to.deep.equal(trips)
   });
 
+  it('should be able to view all users booked trips', () => {
+    expect(agent.viewAllBookedTrips()).to.deep.equal(trips)
+  });
+
   it('should be able to view all trips that are currently happening by date', () => {
-    expect(viewTripsToday()).to.equal()
+    let today = "2021/02/12"
+    expect(agent.viewTripsToday(today)).to.deep.equal([
+      {
+        "id": 8,
+        "userID": 2,
+        "destinationID": 1,
+        "travelers": 6,
+        "date": "2021/02/09",
+        "duration": 4,
+        "status": "approved",
+        "suggestedActivities": []
+      },
+      {
+        "id": 13,
+        "userID": 12,
+        "destinationID": 2,
+        "travelers": 1,
+        "date": "2021/02/12",
+        "duration": 11,
+        "status": "approved",
+        "suggestedActivities": []
+      }
+    ])
   });
 
   it('should generate a total income for this year by all users', () => {
-    expect().to.equal()
+    expect(agent.totalIncomeGeneratedYearly("2021")).to.equal(5016)
+    expect(agent.totalIncomeGeneratedYearly("2020")).to.equal(57689.5)
+    expect(agent.totalIncomeGeneratedYearly("2019")).to.equal(13898.5)
   });
+
+  it('should add a new destination', () => {
+    expect(agent.addNewDestination(21, "Bora Bora", 400, 200, "http//www.url.com/image", "bora bora beaches")).to.deep.equal(
+      {
+        id: 21,
+        destination: "Bora Bora",
+        estimatedLodgingCostPerDay: 400,
+        estimatedFlightCostPerPerson: 200,
+        image: "http//www.url.com/image",
+        alt: "bora bora beaches",
+      }
+    )
+  })
 });
