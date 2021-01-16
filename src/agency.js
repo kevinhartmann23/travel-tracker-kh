@@ -25,6 +25,22 @@ class Agency {
 
   }
 
+  displayDestinationNames(){
+    return this.possibleDestinations.map(dest => dest.destination)
+  }
+
+  addNewDestination(destID, location, lodgingCost, flightCostPerPerson, imageURL, altText){
+    let newDestination = {
+      id: destID,
+      destination: location,
+      estimatedLodgingCostPerDay: lodgingCost,
+      estimatedFlightCostPerPerson: flightCostPerPerson,
+      image: imageURL,
+      alt: altText,
+    }
+    return newDestination
+  }
+
   calculateTripCost(tripID) {
     let bookedTrip = this.bookedTrips.find(trip => trip.id === tripID)
     let destination = this.possibleDestinations.find(dest => dest.id === bookedTrip.destinationID)
@@ -40,9 +56,10 @@ class Agency {
     return costData;
   }
 
-  calculateCustomerTotalYearExpense(userID){
+  calculateCustomerTotalYearExpense(userID, year){
     let customerTrips = this.filterTripsByCustomerID(userID)
-    return customerTrips.reduce((acc, trip) => {
+    let filteredTripsByYear = customerTrips.filter(trip => trip.date.slice(0,4) === year)
+    return filteredTripsByYear.reduce((acc, trip) => {
       let costData = this.calculateTripCost(trip.id)
       acc += Number(costData.total)
       return acc;

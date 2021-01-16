@@ -10,19 +10,33 @@ class Agent extends Agency {
   }
 
   viewAllBookedTrips(){
-
+    return this.bookedTrips
   }
 
-  viewTripsToday(){
-
+  viewTripsToday(today){
+    let currentDate = Date.parse(today)
+    return this.bookedTrips.filter(trip => {
+      let startDate = Date.parse(trip.date)
+      let endDate = Date.parse(this.determineEndDateByDuration(trip.id))
+     return (startDate <= currentDate) && (currentDate <= endDate)
+    })
   }
 
-  totalIncomeGenerated(){
-
+  totalIncomeGeneratedYearly(year){
+    return this.customers.reduce((acc, customer) => {
+      let customerTotal = this.calculateCustomerTotalYearExpense(customer.id, year)
+      acc += customerTotal;
+      return acc;
+    }, 0)
   }
 
-  changeTripStatus(){
-
+  changeTripStatusAndActivities(tripID, status, suggestedActivities){
+    let modifyTrip = {
+      id: tripID,
+      status: status,
+      suggestedActivities: suggestedActivities
+    }
+    return modifyTrip;
   }
 
 
