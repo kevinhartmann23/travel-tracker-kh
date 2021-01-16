@@ -3,6 +3,12 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
+import Agency from './agency.js';
+import Traveler from './traveler.js';
+import Trip from './trip.js';
+import Destination from './destination.js';
+import Admin from './admin.js'
+
 import fetchRequests from './fetchRequests.js';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
