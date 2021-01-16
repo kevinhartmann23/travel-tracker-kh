@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <meta charset='UTF-8'>
+    <title>Travel Tracker</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
-
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
+    <nav class="navigation-bar">
+      <div class="nav-left">
+        <img src="../images/suitcase.png" alt="suitcase" class="suitcase-img"/>
+        <label for="book-trip-button" class="hidden">Click to book a trip</label>
+        <button class="book-trip-button">book</button>
+      </div>
+      <h1 class="nav-title">Travel Ninja</h1>
+      <div class="nav-right">
+        <div class="dropdown-menu">
+          <img src="./images/menu-icon.svg" alt="menu" id="menu-hamburger"/>
+          <div class="dropdown-content">
+            <span class="dropdown-item" id="book-trip">book trip</span>
+            <span class="dropdown-item" id="logout">logout</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section class="traveler-page"></section>
+      <section class="admin-page hidden"></section>
+    </main>
+    <!-- <input type="date" id="date" onChange="updateDate()" value="2019-09-22" min="2019-06-15" max="2021-09-22"> -->
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>
