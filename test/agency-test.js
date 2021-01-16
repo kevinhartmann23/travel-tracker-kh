@@ -1,6 +1,9 @@
 import {expect} from 'chai';
 
 import Agency from '../src/agency.js'
+import Agent from '../src/agent.js'
+import Traveler from '../src/traveler.js'
+
 import {
   travelers,
   trips,
@@ -8,22 +11,29 @@ import {
 } from './test-data.js'
 
 let travelAgency;
+let agent;
+let user;
 
-describe.only('Agency', () => {
+describe.only('Agency & Agent', () => {
   beforeEach('instantiate a new agency class', () => {
     travelAgency = new Agency(travelers, trips, destinations)
+    user = new Traveler(travelAgency.findCustomerbyInfo(2), travelAgency.filterTripsByCustomerID(2))
+    agent = new Agent(travelers, trips, destinations)
   });
 
   it('should store all traveler data', () => {
     expect(travelAgency.customers).to.deep.equal(travelers)
+    expect(agent.customers).to.deep.equal(travelers)
   });
 
   it('should store all trip data', () => {
     expect(travelAgency.bookedTrips).to.deep.equal(trips)
+    expect(agent.bookedTrips).to.deep.equal(trips)
   });
 
   it('should store all destination data', () => {
     expect(travelAgency.possibleDestinations).to.deep.equal(destinations)
+    expect(agent.possibleDestinations).to.deep.equal(destinations)
   });
 
   it('should calculate the cost of a single trip plus 10% agency fee', () => {
@@ -32,26 +42,6 @@ describe.only('Agency', () => {
       agencyFee: '10%',
       total: (7128.00).toFixed(2),
     })
-  });
-
-  it('should filter customers by name or ID', () => {
-    expect(travelAgency.findCustomerbyInfo(2)).to.deep.equal({
-      "id": 2,
-      "name": "Rachael Vaughten",
-      "travelerType": "thrill-seeker",
-    })
-    expect(travelAgency.findCustomerbyInfo('Felicdad rishbrook')).to.deep.equal({
-      "id": 19,
-      "name": "Felicdad Rishbrook",
-      "travelerType": "thrill-seeker",
-    })
-    expect(travelAgency.findCustomerbyInfo("leila")).to.deep.equal({
-      "id": 4,
-      "name": "Leila Thebeaud",
-      "travelerType": "photographer",
-    })
-
-    expect(travelAgency.findCustomerbyInfo("Kevin HaRTmann")).to.equal("Error: User Not Found")
   });
 
   it('should filter trips by customer id', () => {
@@ -151,45 +141,95 @@ describe.only('Agency', () => {
     ])
   });
 
-  it('should filter trips by status', () => {
-    expect(travelAgency.filterTripsByStatus('pending')).to.deep.equal([
-      {
-          "id": 2,
-          "userID": 2,
-          "destinationID": 8,
-          "travelers": 5,
-          "date": "2020/10/04",
-          "duration": 18,
-          "status": "pending",
-          "suggestedActivities": []
-        }, {
-          "id": 3,
-          "userID": 3,
-          "destinationID": 3,
-          "travelers": 4,
-          "date": "2020/05/22",
-          "duration": 17,
-          "status": "pending",
-          "suggestedActivities": []
-        }
-      ])
-    expect(travelAgency.filterTripsByStatus('denied')).to.deep.equal([
-      {
-        "id": 6,
-        "userID": 4,
-        "destinationID": 2,
-        "travelers": 3,
-        "date": "2020/06/29",
-        "duration": 9,
-        "status": "denied",
+  it('should filter customers by name or ID', () => {
+    expect(travelAgency.findCustomerbyInfo(2)).to.deep.equal({
+      "id": 2,
+      "name": "Rachael Vaughten",
+      "travelerType": "thrill-seeker",
+    })
+    expect(travelAgency.findCustomerbyInfo('Felicdad rishbrook')).to.deep.equal({
+      "id": 19,
+      "name": "Felicdad Rishbrook",
+      "travelerType": "thrill-seeker",
+    })
+    expect(travelAgency.findCustomerbyInfo("leila")).to.deep.equal({
+      "id": 4,
+      "name": "Leila Thebeaud",
+      "travelerType": "photographer",
+    })
+
+    expect(travelAgency.findCustomerbyInfo("Kevin HaRTmann")).to.equal("Error: User Not Found")
+  });
+
+  it('should determine an end date given a start date and duration', () => {
+    expect(travelAgency.determineEndDateByDuration(2)).to.equal("2020/10/22")
+    expect(travelAgency.determineEndDateByDuration(3)).to.equal("2020/06/08")
+
+  });
+
+  it('should determine a duration given a start date and end date', () => {
+    expect(travelAgency.determineDurationByEndDate("2019/07/21", "2019/07/26")).to.equal(5)
+  });
+
+  it('should calculate the cost of total spent by a customer', () => {
+    expect(travelAgency.calculateCustomerTotalYearExpense(2)).to.equal(21906.5)
+  });
+
+/////////////////////////AGENT ONLY TEST///////////////////////////////////////
+
+it('should filter trips by status', () => {
+  expect(agent.filterTripsByStatus('pending')).to.deep.equal([
+    {
+        "id": 2,
+        "userID": 2,
+        "destinationID": 8,
+        "travelers": 5,
+        "date": "2020/10/04",
+        "duration": 18,
+        "status": "pending",
+        "suggestedActivities": []
+      }, {
+        "id": 3,
+        "userID": 3,
+        "destinationID": 3,
+        "travelers": 4,
+        "date": "2020/05/22",
+        "duration": 17,
+        "status": "pending",
         "suggestedActivities": []
       }
     ])
+  expect(agent.filterTripsByStatus('denied')).to.deep.equal([
+    {
+      "id": 6,
+      "userID": 4,
+      "destinationID": 2,
+      "travelers": 3,
+      "date": "2020/06/29",
+      "duration": 9,
+      "status": "denied",
+      "suggestedActivities": []
+    }
+  ])
+});
+
+  it('should be able to change the status of a travlers trip by id', () => {
+    expect(agent.changeTripStatus(2, "approve", ["Horseback Ride", "Snorkel", "Mix it up with the locals"])).to.equal({
+      id: 3,
+      status: "pending",
+      suggestedActivities: ["Horseback Ride", "Snorkel", "Mix it up with the locals"]
+    })
   });
 
-  it('should calculate the cost of total spent by a user', () => {
-    expect(travelAgency.calculateTotalSpent(2)).to.equal()
-    expect(travelAgency.calculateTotalSpent(5)).to.equal()
+  it('should be able to view all users booked trips', () => {
+    expect(agent.viewAllBookedTrips()).to.deep.equal(trips)
   });
 
+  it('should be able to view all trips that are currently happening by date', () => {
+    expect(viewTripsToday()).to.equal()
+  });
+
+  it('should generate a total income for this year by all users', () => {
+    expect().to.equal()
+  });
 });
