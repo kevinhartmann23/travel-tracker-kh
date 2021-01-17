@@ -23,6 +23,15 @@ let domUpdates = {
       `
     })
   },
+
+  displayCustomerFooter(agency, traveler, welcomeElement, expenseElement){
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let yearExpense = agency.calculateCustomerTotalYearExpense(traveler.id, currentYear.toString())
+    console.log(traveler, currentYear, yearExpense)
+    welcomeElement.innerText = `Welcome, ${traveler.name}!`
+    expenseElement.innerText = `$${yearExpense}`
+  },
 };
 
 

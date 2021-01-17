@@ -20,15 +20,17 @@ import './images/arrow.png'
 import './images/admin.png'
 import './images/close.png'
 
-let bookButton = document.querySelector('.book-trip-button');
-let bookBox = document.querySelector('.nav-left')
-let searchBox = document.querySelector('.search-box');
-let searchButton = document.querySelector('.search-button');
-let searchInput = document.querySelector('.search-input');
-let tripGrid = document.querySelector('.traveler-page');
-let adminPendingGrid = document.querySelector('.pending-trips')
-let adminApprovedGrid = document.querySelector('.approved-trips')
-let adminDepartedGrid = document.querySelector('.departed-trips')
+const bookButton = document.querySelector('.book-trip-button');
+const bookBox = document.querySelector('.nav-left')
+const searchBox = document.querySelector('.search-box');
+const searchButton = document.querySelector('.search-button');
+const searchInput = document.querySelector('.search-input');
+const tripGrid = document.querySelector('.traveler-page');
+const adminPendingGrid = document.querySelector('.pending-trips');
+const adminApprovedGrid = document.querySelector('.approved-trips');
+const adminDepartedGrid = document.querySelector('.departed-trips');
+const footerWelcomeMessage = document.querySelector('.welcome-user');
+const footerExpenseAmount = document.querySelector('.expenses-cost');
 
 let travelAgency, traveler;
 
@@ -46,8 +48,16 @@ function retrieveAllData(){
     fetchRequests.getAllTripData()
   ])
     .then(data => {
-      travelAgency = new Agency(data[0].travelers, data[2].trips, data[1].destinations)
-      traveler = new Traveler(travelAgency.findCustomerbyInfo(2), travelAgency.filterTripsByCustomerID(2), travelAgency.compileCustomerDestinations(2))
+      travelAgency = new Agency(
+        data[0].travelers,
+        data[2].trips,
+        data[1].destinations
+      );
+      traveler = new Traveler(
+        travelAgency.findCustomerbyInfo(44),
+        travelAgency.filterTripsByCustomerID(44),
+        travelAgency.compileCustomerDestinations(44)
+      );
       showData();
     })
     .catch(error => console.log(error))
@@ -55,4 +65,5 @@ function retrieveAllData(){
 
 function showData(){
   domUpdates.displayCustomerTrips(traveler, travelAgency, tripGrid)
+  domUpdates.displayCustomerFooter(travelAgency, traveler, footerWelcomeMessage, footerExpenseAmount)
 }
