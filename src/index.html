@@ -13,36 +13,36 @@
         <img class="suitcase-img" src="./images/suitcase.png" alt="suitcase">
         <label for="book-trip-button" class="hidden">Click to book a trip</label>
         <button class="book-trip-button" aria-label='Book A Trip' type="button">book</button>
-        <div class="search-box">
-          <form class='search-bar'>
-            <label for='search-button' class='hidden'>Click here to search here</label>
-              <button id='search-button' aria-label='Search For Customers' class='search-button' type='button'>
-                <img class="user search" src="./images/user.png" alt="search user">
-              </button>
-            <label for='search-input' hidden>Search For Customers</label>
-              <input id='search-input' class='search-input' type='text' placeholder='by name...' value=''>
+      </div>
+      <div class="search-box hidden">
+        <form class='search-bar'>
+          <label for='search-button' class='hidden'>Click here to search here</label>
+          <button id='search-button' aria-label='Search For Customers' class='search-button' type='button'>
+            <img class="user search" src="./images/user.png" alt="search user">
+          </button>
+          <label for='search-input' hidden>Search For Customers</label>
+          <input id='search-input' class='search-input' type='text' placeholder='by name...' value=''>
           </form>
-        </div>
       </div>
       <h1 class="nav-title">Travel Ninja</h1>
       <div class="nav-right">
         <div class="dropdown-menu">
-          <img src="./images/menu.png" alt="menu" height="20px" width="20px" id="menu-hamburger">
+          <img class="hamburger" src="./images/menu.png" alt="menu">
           <div class="dropdown-content">
-            <span class="dropdown-item" id="book-trip">book trip</span>
-            <span class="dropdown-item" id="logout">logout</span>
+            <span class="dropdown-item" id="book-trip" aria-label="book-trip">book trip</span>
+            <span class="dropdown-item" id="logout" aria-label="logout">logout</span>
           </div>
         </div>
       </div>
     </nav>
     <main>
-      <section class="traveler-page">
+      <section class="traveler-page hidden">
         <article class="traveler-trip">
           <div class="image-wrapper">
             <h2 class="destination-title">Destination Title</h2>
           </div>
           <div class="info-wrapper">
-            <h3 class="travel-date">Date: 12/20/2020</h3>
+            <h3 class="travel-date">Departure: 12/20/2020</h3>
             <h4 class="travel-duration">17 Days</h4>
             <h4 class="travel-cost">Cost: $1,500</h4>
             <div class= "travelers-wrapper">
@@ -56,7 +56,7 @@
             <h2 class="destination-title">Destination Title</h2>
           </div>
           <div class="info-wrapper">
-            <h3 class="travel-date">Date: 12/20/2020</h3>
+            <h3 class="travel-date">Departure: 12/20/2020</h3>
             <h4 class="travel-duration">17 Days</h4>
             <h4 class="travel-cost">Cost: $1,500</h4>
             <div class= "travelers-wrapper">
@@ -70,7 +70,7 @@
             <h2 class="destination-title">Destination Title</h2>
           </div>
           <div class="info-wrapper">
-            <h3 class="travel-date">Date: 12/20/2020</h3>
+            <h3 class="travel-date">Departure: 12/20/2020</h3>
             <h4 class="travel-duration">17 Days</h4>
             <h4 class="travel-cost">Cost: $1,500</h4>
             <div class= "travelers-wrapper">
@@ -80,16 +80,68 @@
           </div>
         </article>
       </section>
-      <section class="admin-page hidden">
+      <section class="admin-page">
         <section class="pending-trips">
+          <article class="admin-view">
+            <div class="info-wrapper">
+              <h3 class="traveler-name">Name: Kevin Hartmann</h3>
+              <h3 class="destination-title">Destination Title</h3>
+              <h3 class="travel-date">Departure: 12/20/2020</h3>
+              <h3 class="travel-duration">17 Days</h3>
+            </div>
+            <div class= "agent-wrapper">
+              <div class= "travelers-wrapper">
+                <img class="person-icon" src="./images/person-grey.png" alt="suitcase">
+                <h4 class="number-of-travalers">7</h4>
+              </div>
+              <h4 class="travel-cost subtotal"> Subtotal: $1,500</h3>
+              <h4 class="travel-cost commission">Commission: $150</h3>
+              <h4 class="travel-status">pending...</h4>
+              <label for='approve-button' class='hidden'>Click here to Approve Pending Trip</label>
+              <button id='approve-button' aria-label='Search For Customers' class='approve-button' type='button'>
+            </div>
+          </article>
         </section>
         <section class="approved-trips">
+          <article class="admin-view">
+            <div class="info-wrapper">
+              <h3 class="traveler-name">Name: Kevin Hartmann</h3>
+              <h3 class="destination-title">Destination Title</h3>
+              <h3 class="travel-date">Departure: 12/20/2020</h3>
+              <h3 class="travel-duration">17 Days</h3>
+            </div>
+            <div class= "agent-wrapper">
+              <div class= "travelers-wrapper">
+                <img class="person-icon" src="./images/person-grey.png" alt="suitcase">
+                <h4 class="number-of-travalers">7</h4>
+              </div>
+              <h4 class="travel-cost subtotal"> Subtotal: $1,500</h3>
+              <h4 class="travel-cost commission">Commission: $150</h3>
+              <h4 class="travel-status">approved...</h4>
+              <label for='cancel-button' class='hidden'>Click here to Cancel Upcoming Trip</label>
+              <button id='cancel-button' aria-label='Search For Customers' class='cancel-button' type='button'>
         </section>
-        <section class="today-trips">
+        <section class="departed-trips">
+          <article class="admin-view">
+            <div class="info-wrapper">
+              <h3 class="traveler-name">Name: Kevin Hartmann</h3>
+              <h3 class="destination-title">Destination Title</h3>
+              <h3 class="travel-date">Departure: 12/20/2020</h3>
+              <h3 class="travel-duration">Return: 12/31/2020</h3>
+            </div>
+            <div class= "agent-wrapper">
+              <div class= "travelers-wrapper">
+                <img class="person-icon" src="./images/person-grey.png" alt="suitcase">
+                <h4 class="number-of-travalers">7</h4>
+              </div>
+              <h4 class="travel-cost subtotal"> Subtotal: $1,500</h3>
+              <h4 class="travel-cost commission">Commission: $150</h3>
+              <h4 class="travel-status">departed...</h4>
         </section>
       </section>
     </main>
     <footer class="foot">
+    </footer>
 
     <!-- <input type="date" id="date" onChange="updateDate()" value="2019-09-22" min="2019-06-15" max="2021-09-22"> -->
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
