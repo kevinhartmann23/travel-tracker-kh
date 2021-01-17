@@ -1,9 +1,10 @@
 class Traveler  {
-  constructor(data, trips){
-    this.id = data.id
-    this.name = data.name
-    this.travelerType = data.travelerType
-    this.scheduledTrips = trips
+  constructor(data, trips, destinations){
+    this.id = data.id;
+    this.name = data.name;
+    this.travelerType = data.travelerType;
+    this.scheduledTrips = trips;
+    this.scheduleDestinations = destinations;
   }
 
   bookTrip(trip){

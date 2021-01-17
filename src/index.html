@@ -37,48 +37,6 @@
     </nav>
     <main>
       <section class="traveler-page">
-        <article class="traveler-trip">
-          <div class="image-wrapper">
-            <h1 class="destination-title">Destination Title</h1>
-          </div>
-          <div class="info-wrapper">
-            <h2 class="travel-date">Departure: 12/20/2020</h2>
-            <p class="travel-duration">17 Days</p>
-            <p class="travel-cost">Cost: $1,500</p>
-            <div class= "travelers-wrapper">
-              <img class="person-icon" src="./images/person-grey.png" alt="suitcase">
-              <p class="number-of-travalers">7</p>
-            </div>
-          </div>
-        </article>
-        <article class="traveler-trip">
-          <div class="image-wrapper">
-            <h1 class="destination-title">Destination Title</h1>
-          </div>
-          <div class="info-wrapper">
-            <h2 class="travel-date">Departure: 12/20/2020</h2>
-            <p class="travel-duration">17 Days</p>
-            <p class="travel-cost">Cost: $1,500</p>
-            <div class= "travelers-wrapper">
-              <img class="person-icon" src="./images/person-grey.png" alt="suitcase">
-              <p class="number-of-travalers">7</p>
-            </div>
-          </div>
-        </article>
-        <article class="traveler-trip">
-          <div class="image-wrapper">
-            <h1 class="destination-title">Destination Title</h1>
-          </div>
-          <div class="info-wrapper">
-            <h2 class="travel-date">Departure: 12/20/2020</h2>
-            <p class="travel-duration">17 Days</p>
-            <p class="travel-cost">Cost: $1,500</p>
-            <div class= "travelers-wrapper">
-              <img class="person-icon" src="./images/person-grey.png" alt="suitcase">
-              <p class="number-of-travalers" aria-label="number of travelers">7</p>
-            </div>
-          </div>
-        </article>
       </section>
       <section class="admin-page hidden">
         <h1 class="pending-title">pending trips</h1>
@@ -149,8 +107,15 @@
       </section>
     </main>
     <footer class="foot">
+      <div class="user-wrapper">
+        <img class="user footer" src="./images/user.png" alt="user icon">
+        <p class="welcome-user"></p>
+      </div>
+      <div class="traveler-expenses">
+        <p class="expenses-title">This Year's Trip Expenses:<p>
+          <p class="expenses-cost"></p>
+      </div>
     </footer>
-
     <!-- <input type="date" id="date" onChange="updateDate()" value="2019-09-22" min="2019-06-15" max="2021-09-22"> -->
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>

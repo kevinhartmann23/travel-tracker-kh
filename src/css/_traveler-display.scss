@@ -28,12 +28,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .destination-title {
   width: 100%;
   text-align: center;
   margin-top: .5em;
+  color: $coral;
+  font-size: 1.4em;
 }
 
 .info-wrapper {
