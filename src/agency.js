@@ -9,6 +9,14 @@ class Agency {
     return this.bookedTrips.filter(trip => trip.userID === id)
   }
 
+  compileCustomerDestinations(customerID){
+    let trips = this.filterTripsByCustomerID(customerID)
+    let destinations = this.possibleDestinations.filter(dest => {
+      return trips.find(trip => trip.destinationID === dest.id)
+    })
+    return destinations;
+  }
+
   findCustomerbyInfo(info) {
     let result;
     if (typeof info === 'string') {

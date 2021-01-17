@@ -8,6 +8,7 @@ import Traveler from './traveler.js';
 import Agent from './agent.js'
 
 import fetchRequests from './fetchRequests.js';
+import domUpdates from './domUpdates.js';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/suitcase.png'
@@ -19,9 +20,17 @@ import './images/arrow.png'
 import './images/admin.png'
 import './images/close.png'
 
-console.log('This is the JavaScript entry file - your code begins here.');
+let bookButton = document.querySelector('.book-trip-button');
+let bookBox = document.querySelector('.nav-left')
+let searchBox = document.querySelector('.search-box');
+let searchButton = document.querySelector('.search-button');
+let searchInput = document.querySelector('.search-input');
+let tripGrid = document.querySelector('.traveler-page');
+let adminPendingGrid = document.querySelector('.pending-trips')
+let adminApprovedGrid = document.querySelector('.approved-trips')
+let adminDepartedGrid = document.querySelector('.departed-trips')
 
-let allUsers, destinationData, tripData;
+let travelAgency, traveler;
 
 window.onload = retrieveAllData();
 
@@ -37,15 +46,13 @@ function retrieveAllData(){
     fetchRequests.getAllTripData()
   ])
     .then(data => {
-      allUsers = data[0].travelers;
-      destinationData = data[1].destinations;
-      tripData = data[2].trips;
+      travelAgency = new Agency(data[0].travelers, data[2].trips, data[1].destinations)
+      traveler = new Traveler(travelAgency.findCustomerbyInfo(2), travelAgency.filterTripsByCustomerID(2), travelAgency.compileCustomerDestinations(2))
       showData();
     })
     .catch(error => console.log(error))
 }
 
 function showData(){
-  console.log(allUsers, destinationData, tripData)
-  console.log(allUsers[23], destinationData[12], tripData[24])
+  domUpdates.displayCustomerTrips(traveler, travelAgency, tripGrid)
 }
