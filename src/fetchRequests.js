@@ -28,31 +28,34 @@ let fetchRequests = {
     .catch(error => console.log(error))
   },
 
-  addTripObj: {
-    id: 5230,
-    userID: 23,
-    destinationID: 24,
-    travelers: 2,
-    date: "2020/05/23",
-    duration: 12,
-    status: "approved",
-    suggestedActivities: ["swim", "drink cerveza", "ride horses"],
-  },
+//Provided by Traveler.bookTrip()
+  // addTripObj: {
+  //   id: 5230,
+  //   userID: 23,
+  //   destinationID: 24,
+  //   travelers: 2,
+  //   date: "2020/05/23",
+  //   duration: 12,
+  //   status: "approved",
+  //   suggestedActivities: ["swim", "drink cerveza", "ride horses"],
+  // },
 
-  addDesitnationObj: {
-    id: 5000,
-    destination: "BORA BORA",
-    estimatedLodgingCostPerDay: 400,
-    estimatedFlightCostPerPerson: 300,
-    image: "TEST",
-    alt: "TEST",
-  },
+//Provided by Agency.addNewDestination()
+  // addDesitnationObj: {
+  //   id: 5000,
+  //   destination: "BORA BORA",
+  //   estimatedLodgingCostPerDay: 400,
+  //   estimatedFlightCostPerPerson: 300,
+  //   image: "TEST",
+  //   alt: "TEST",
+  // },
 
-  changeTripStatusObj: {
-    id: 3,
-    status: "pending",
-    suggestedActivities: ["PARTYYYYYYYY"],
-  },
+//Provided by Agent.changeTripStatusAndActivities()
+  // changeTripStatusObj: {
+  //   id: 3,
+  //   status: "pending",
+  //   suggestedActivities: ["PARTYYYYYYYY"],
+  // },
 
   createPostOption(data){
     let option = {

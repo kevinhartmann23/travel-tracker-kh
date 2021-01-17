@@ -1,7 +1,23 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+@import 'variables.scss';
+@import 'navbar.scss';
+@import 'traveler-display.scss';
+@import 'agent-display.scss';
 
-body {
-  background: $primary-background;
+* {
+  margin: 0em;
+  padding: 0em;
+  border: 0em;
 }
+
+html {
+  height: 100vh;
+  width: 100vw;
+  font-family: $regular-font;
+  background-color: $light-grey;
+  font-size: 1em;
+}
+
+// main {
+//   align-content: center;
+// }
