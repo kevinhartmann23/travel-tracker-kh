@@ -1,17 +1,51 @@
 .admin-page {
   align-self: center;
   height: 100vh;
-  width: 95vw;
+  width: 100vw;
   grid-gap: 1rem;
   justify-content: center;
   margin-top: 10vh;
-  margin-right: 1vw;
-  margin-left: 1vw;
   margin-bottom: 2vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 4vh 96vh;
   grid-template-areas:
+    "titleP titleA titleD"
     "pending approved departed"
+}
+
+.pending-title {
+  grid-area: "titleP";
+  text-align: center;
+  font-size: 2em;
+}
+
+.approved-title {
+  @extend .pending-title;
+  grid-area: "titleA";
+}
+
+.departed-title {
+  @extend .pending-title;
+  grid-area: "titleD";
+}
+
+.approve-button {
+  @extend .book-trip-button;
+  color: $grey;
+  border: solid 1px $grey;
+  width: 75%;
+  height: 1.5em;
+}
+
+.cancel-button {
+  @extend .approve-button;
+  background-color: $coral;
+}
+
+.departed-button {
+  @extend .approve-button;
+  background: $light-grey;
 }
 
 .pending-trips {
@@ -21,27 +55,17 @@
   grid-template-columns: repeat(1, 30vw);
   grid-template-rows: repeat(5, 25vh);
   justify-content: center;
-
-  border-right: solid .1em $rich-black;
+  overflow: scroll;
 }
 
 .approved-trips {
-  grid-area: "approved";
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(1, 30vw);
-  grid-template-rows: repeat(5, 25vh);
-
+  @extend .pending-trips;
+  border-right: solid .1em $rich-black;
+  border-left: solid .1em $rich-black;
 }
 
 .departed-trips {
-  grid-area: "departed";
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(1, 30vw);
-  grid-template-rows: repeat(5, 25vh);
-
-  border-left: solid .1em $rich-black;
+  @extend .pending-trips;
 }
 
 .admin-view {
@@ -49,8 +73,38 @@
   flex-direction: row;
   width: inherit;
   background-color: $white;
+  box-shadow: 0 3px 5px -1px $rich-black;
 }
 
-.info-wrapper {
-  width: 60%;
+.agent-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  justify-content: space-between;
+  padding: .5em;
+  align-items: center;
+  border-left: solid 1px $grey;
+}
+
+.agent-info-wrapper {
+  width: 55%;
+  background-color: $green;
+  padding: 1em;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.agent-traveler-name {
+  font-size: 1.5em;
+}
+
+.agent-destination-title {
+  font-size: 1.25em;
+}
+
+.agent-travelers-wrapper {
+  @extend .travelers-wrapper;
+  border: solid 1px $green;
 }
