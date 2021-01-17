@@ -10,7 +10,14 @@ import Agent from './agent.js'
 import fetchRequests from './fetchRequests.js';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+import './images/suitcase.png'
+import './images/menu.png'
+import './images/user.png'
+import './images/person-grey.png'
+import './images/person-coral.png'
+import './images/arrow.png'
+import './images/admin.png'
+import './images/close.png'
 
 console.log('This is the JavaScript entry file - your code begins here.');
 

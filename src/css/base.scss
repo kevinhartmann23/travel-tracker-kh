@@ -1,13 +1,22 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import 'variables.scss';
 @import 'navbar.scss';
+@import 'traveler-display.scss';
+
+* {
+  margin: 0em;
+  padding: 0em;
+  border: 0em;
+}
 
 html {
   height: 100vh;
+  width: 100vw;
   font-family: $regular-font;
+  background-color: $light-grey;
   font-size: 1em;
 }
 
-body {
-  // background: $primary-background;
-}
+// main {
+//   align-content: center;
+// }
