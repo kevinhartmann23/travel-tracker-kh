@@ -1,4 +1,12 @@
+import Agency from './agency.js';
+import Traveler from './traveler.js';
+import domUpdates from './domUpdates.js';
+
 let fetchRequests = {
+    postTripUrl:"http://localhost:3001/api/v1/trips",
+    postNewDestinationUrl: "http://localhost:3001/api/v1/destinations",
+    changeTripStatusUrl: "http://localhost:3001/api/v1/updateTrip",
+  // fetchRequests.deleteSingleTrip(4)
 
     getAllUserData(){
     return fetch("http://localhost:3001/api/v1/travelers")
@@ -68,10 +76,32 @@ let fetchRequests = {
     return option;
   },
 
-  updateData(url, option){
+  updateData(url, option, agency, traveler, uniqueId, grid, welcome, expense){
     return fetch(url, this.createPostOption(option))
       .then(response => response.json())
-      .then(message => console.log(message))
+      .then(message => {
+        console.log(message)
+        Promise.all([
+          fetchRequests.getAllUserData(),
+          fetchRequests.getAllDestinationData(),
+          fetchRequests.getAllTripData()
+        ])
+          .then(data => {
+            agency = new Agency(
+              data[0].travelers,
+              data[2].trips,
+              data[1].destinations
+            );
+            traveler = new Traveler(
+              agency.findCustomerbyInfo(44),
+              agency.filterTripsByCustomerID(44),
+              agency.compileCustomerDestinations(44)
+            );
+            uniqueId = data[2].trips.length + 1;
+            domUpdates.displayCustomerTrips(traveler, agency, grid)
+            domUpdates.displayCustomerFooter(agency, traveler, welcome, expense)
+          })
+      })
       .catch(error => console.log(error))
   },
 

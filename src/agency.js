@@ -37,6 +37,10 @@ class Agency {
     return this.possibleDestinations.map(dest => dest.destination)
   }
 
+  findDestinationByName(name){
+    return this.possibleDestinations.find(dest => dest.destination === name).id
+  }
+
   addNewDestination(destID, location, lodgingCost, flightCostPerPerson, imageURL, altText){
     let newDestination = {
       id: destID,

@@ -12,7 +12,7 @@ import {
 let travelAgency;
 let newTraveler;
 
-describe.only('Traveler', () => {
+describe('Traveler', () => {
   beforeEach('instantiate a new traveler class', () => {
     travelAgency = new Agency(travelers, trips, destinations)
     newTraveler = new Traveler(travelAgency.findCustomerbyInfo(2), travelAgency.filterTripsByCustomerID(2))

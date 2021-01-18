@@ -14,7 +14,7 @@ let travelAgency;
 let agent;
 let user;
 
-describe.only('Agency & Agent', () => {
+describe('Agency & Agent', () => {
   beforeEach('instantiate a new agency class', () => {
     travelAgency = new Agency(travelers, trips, destinations)
     user = new Traveler(travelAgency.findCustomerbyInfo(2), travelAgency.filterTripsByCustomerID(2))
