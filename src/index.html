@@ -16,7 +16,7 @@
       </div>
       <div class="search-box hidden">
         <form class='search-bar'>
-          <label for='search-button' class='hidden'>Click here to search here</label>
+          <label for='search-button' class='hidden'>Click here to search for customers</label>
           <button id='search-button' aria-label='Search For Customers' class='search-button' type='button'>
             <img class="user search" src="./images/user.png" alt="search user">
           </button>
@@ -36,6 +36,36 @@
       </div>
     </nav>
     <main>
+      <div id="book-modal" class="traveler-book-modal">
+          <div class="modal-header">
+            <h1 class="modal-title">Time to Explore!</h1>
+            <img class="close-button" src="./images/close.png" alt="exit">
+          </div>
+          <form class="modal-body">
+            <div class="calendar-wrapper">
+              <label for="depart-date" aria-label="Select Departure Date" hidden>Depart</label>
+              <input type="date" id="depart-date" onChange="updateDate()" value="2021-01-01" min="2021-01-01" max="2022-12-31">
+              <img class="date-arrow" src="./images/arrow.png" alt="arrow pointing right">
+              <label for="return-date" aria-label="Select Return Date" hidden>Return</label>
+              <input type="date" id="return-date" onChange="updateDate()" value="2021-01-01" min="2021-01-01" max="2023-03-28">
+            </div>
+            <div class="destination-wrapper">
+              <label for="destinations" hidden>Select Destination</label>
+              <select id="destinations" name="destinations" placeholder="Select Destination">
+                <option value="placeholder">Select Your Destination</option>
+              </select>
+            </div>
+            <div class="num-submit-wrapper">
+              <div class="modal-travelers-wrapper">
+                <img class="person-icon" src="./images/person-grey.png" alt="suitcase">
+                <label for="input-travelers" aria-label="Select Number of Travelers"># of Travelers</label>
+                <input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-travelers">
+              </div>
+              <label for='submit-buttom' class='hidden'>Click here to submit your trip request</label>
+              <button id='submit-button' aria-label='Search For Customers' class='submit-button' type='button'>Submit</button>
+            </div>
+          </form>
+      </div>
       <section class="traveler-page">
       </section>
       <section class="admin-page hidden">
