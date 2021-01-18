@@ -1,0 +1,130 @@
+.traveler-book-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 30vw;
+  top: 25vh;
+  width: 40vw;
+  height: 45vh;
+  overflow: auto;
+  box-shadow: 0 3px 5px -1px $rich-black;
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  // justify-content: space-between;
+}
+
+.modal-body {
+  width: 95%;
+  height: 95%;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.modal-header {
+  background-color: $grey;
+  width: inherit;
+  height: 4em;
+  box-shadow: 0 1px 10px 1px $rich-black;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: $coral;
+}
+
+.modal-title {
+  margin-left: 1em;
+}
+
+.close-button {
+  margin-right: 1em;
+  width: 2em;
+  height: 2em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.calendar-wrapper {
+  display: flex;
+  flex-direction: row;
+  font-size: 2em;
+  margin-top: .5em;
+  justify-content: space-around;
+  margin-bottom: 1em;
+}
+
+#depart-date, #return-date {
+  border: 1px solid $coral;
+  width: 9em;
+  height: 2em;
+  font-size: .75em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.date-arrow {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 1em;
+  margin-left: 1em;
+}
+
+.destination-wrapper {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+#destinations {
+  width: 12em;
+  height: 2em;
+  font-size: 1.5em;
+  border: 1px solid $coral;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.num-submit-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: inherit;
+  justify-content: space-around;
+}
+
+.submit-button {
+  @extend .cancel-button;
+  width: 5em;
+  height: 2em;
+}
+
+.input-travelers {
+  font-size: 2em;
+  width: 2em;
+  text-align: center;
+  background-color: $light-grey;
+  padding:.25em;
+  border-top-right-radius: .5em;
+  border-bottom-right-radius: .5em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.modal-travelers-wrapper {
+  @extend .travelers-wrapper;
+  width: 8em;
+}
