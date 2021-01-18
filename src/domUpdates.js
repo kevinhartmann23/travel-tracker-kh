@@ -41,6 +41,15 @@ let domUpdates = {
       inputField.appendChild(option)
     })
   },
+
+  changeDepartDateDefault(elementId, date){
+    document.getElementById(elementId).value = date;
+    document.getElementById(elementId).min = date;
+  },
+  // 
+  // setReturnDateDefault(){
+  //   document.getElementById('return-date').min = document.getElementById('depart-date').value
+  // }
 };
 
 

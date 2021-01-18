@@ -42,8 +42,8 @@ const footerExpenseAmount = document.querySelector('.expenses-cost');
 
 //BOOK TRIP MODAL
 const bookTripModal = document.querySelector('.traveler-book-modal');
-const departDateInput = document.querySelector('.depart-date');
-const returnDateInput = document.querySelector('.return-date');
+const departDateInput = document.querySelector('#depart-date');
+const returnDateInput = document.querySelector('#return-date');
 const destinationSelectInput = document.querySelector('#destinations');
 const numberTravelersInput = document.querySelector('.input-travelers');
 const submitTripInput = document.querySelector('.submit-button');
@@ -52,6 +52,7 @@ const closeModal = document.querySelector('.close-button');
 bookButton.addEventListener('click', displayModal);
 dropdownBook.addEventListener('click', displayModal);
 closeModal.addEventListener('click', hideModal);
+departDateInput.addEventListener('change', setReturnDateDefault);
 
 let travelAgency, traveler, uniqueTripId;
 
@@ -88,8 +89,17 @@ function showData(){
 function displayModal(){
   bookTripModal.classList.remove('hidden');
   tripGrid.classList.add('blur');
+  let todaysDate = travelAgency.convertDate(Date.now()).split('/').join('-');
+  domUpdates.changeDepartDateDefault('depart-date', todaysDate);
   domUpdates.populateDestinationOptions(travelAgency.displayDestinationNames(), destinationSelectInput)
   submitTripInput.addEventListener('click', testData);
+}
+
+function setReturnDateDefault(){
+  let departDateSelected = Date.parse(document.getElementById('depart-date').value);
+  let returnDateMinValue = travelAgency.convertDate(departDateSelected + (86400000 * 2)).split('/').join('-');
+  document.getElementById('return-date').min = returnDateMinValue;
+  document.getElementById('return-date').value = returnDateMinValue;
 }
 
 function hideModal(){
