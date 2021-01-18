@@ -21,11 +21,16 @@ import './images/admin.png'
 import './images/close.png'
 import './images/close-hover.png'
 
+//NAV BAR BUTTONS
 const bookButton = document.querySelector('.book-trip-button');
 const bookBox = document.querySelector('.nav-left')
 const searchBox = document.querySelector('.search-box');
 const searchButton = document.querySelector('.search-button');
 const searchInput = document.querySelector('.search-input');
+const dropdownBook = document.querySelector('#book-trip');
+const dropdownLogout = document.querySelector('#logout');
+
+//DISPLAY GRIDS - TRAVELER & AGENT
 const tripGrid = document.querySelector('.traveler-page');
 const adminPendingGrid = document.querySelector('.pending-trips');
 const adminApprovedGrid = document.querySelector('.approved-trips');
@@ -33,7 +38,20 @@ const adminDepartedGrid = document.querySelector('.departed-trips');
 const footerWelcomeMessage = document.querySelector('.welcome-user');
 const footerExpenseAmount = document.querySelector('.expenses-cost');
 
-let travelAgency, traveler;
+//BOOK TRIP MODAL
+const bookTripModal = document.querySelector('.traveler-book-modal');
+const departDateInput = document.querySelector('.depart-date');
+const returnDateInput = document.querySelector('.return-date');
+const destinationSelectInput = document.querySelector('#destinations');
+const numberTravelersInput = document.querySelector('.input-travelers');
+const submitTripInput = document.querySelector('.submit-button');
+const closeModal = document.querySelector('.close-button');
+
+bookButton.addEventListener('click', displayModal);
+dropdownBook.addEventListener('click', displayModal);
+closeModal.addEventListener('click', hideModal);
+
+let travelAgency, traveler, returnDate, departDate;
 
 window.onload = retrieveAllData();
 
@@ -68,3 +86,36 @@ function showData(){
   domUpdates.displayCustomerTrips(traveler, travelAgency, tripGrid)
   domUpdates.displayCustomerFooter(travelAgency, traveler, footerWelcomeMessage, footerExpenseAmount)
 }
+
+function displayModal(){
+  bookTripModal.classList.remove('hidden');
+  tripGrid.classList.add('blur');
+  domUpdates.populateDestinationOptions(travelAgency.displayDestinationNames(), destinationSelectInput)
+  submitTripInput.addEventListener('click', testData);
+}
+
+function hideModal(){
+  bookTripModal.classList.add('hidden');
+  tripGrid.classList.remove('blur');
+  document.getElementById("return-date").value = ''
+  document.getElementById("depart-date").value = ''
+  document.getElementById("input-travelers").value = '1'
+  document.getElementById("destinations").value = 'placeholder'
+}
+
+function testData(event){
+  let returnDate = document.getElementById("return-date").value
+  let departDate = document.getElementById("depart-date").value
+  let numberOfTravelers = document.getElementById("input-travelers").value
+  let destination = document.getElementById("destinations").value
+  let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
+  // traveler.bookedTrip()
+    console.log("RETURN DATE",returnDate)
+    console.log("DEPART DATE",departDate)
+    console.log("TRAVELERS", numberOfTravelers)
+    console.log("DESTINATION", destination)
+    console.log("DURATION", duration)
+    hideModal()
+}
+
+//onChange="updateDate()"

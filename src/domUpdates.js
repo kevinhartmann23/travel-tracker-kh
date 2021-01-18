@@ -32,6 +32,15 @@ let domUpdates = {
     welcomeElement.innerText = `Welcome, ${traveler.name}!`
     expenseElement.innerText = `$${yearExpense}`
   },
+
+  populateDestinationOptions(destinationNames, inputField){
+    destinationNames.forEach(name => {
+      let option = document.createElement("option")
+      option.value = name;
+      option.innerHTML = name;
+      inputField.appendChild(option)
+    })
+  },
 };
 
 
