@@ -19,6 +19,7 @@ import './images/person-coral.png'
 import './images/arrow.png'
 import './images/admin.png'
 import './images/close.png'
+import './images/close-hover.png'
 
 const bookButton = document.querySelector('.book-trip-button');
 const bookBox = document.querySelector('.nav-left')
