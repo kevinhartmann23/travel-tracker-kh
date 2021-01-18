@@ -49,10 +49,15 @@ const numberTravelersInput = document.querySelector('.input-travelers');
 const submitTripInput = document.querySelector('.submit-button');
 const closeModal = document.querySelector('.close-button');
 const costDisplay = document.querySelector('.cost-display');
+const modalBody = document.querySelector('.modal-body');
+const confirmButton = document.querySelector('.confirm-button');
+const receiptSub = document.querySelector('.subtotal');
+const receiptFee = document.querySelector('.agency-fee');
+const receiptTotal = document.querySelector('.total');
 
 bookButton.addEventListener('click', displayModal);
 dropdownBook.addEventListener('click', displayModal);
-closeModal.addEventListener('click', hideModal);
+closeModal.addEventListener('click', resetModal);
 departDateInput.addEventListener('change', setReturnDateDefault);
 submitTripInput.addEventListener('click', submitTrip);
 
@@ -95,7 +100,7 @@ function displayModal(){
   let todaysDate = travelAgency.convertDate(Date.now()).split('/').join('-');
   domUpdates.changeDepartDateDefault('depart-date', todaysDate);
   domUpdates.populateDestinationOptions(travelAgency.displayDestinationNames(), destinationSelectInput)
-  submitTripInput.addEventListener('click', testData);
+  // submitTripInput.addEventListener('click', testData);
 }
 
 function setReturnDateDefault(){
@@ -106,8 +111,17 @@ function setReturnDateDefault(){
 }
 
 function hideModal(){
-  bookTripModal.classList.add('hidden');
+  modalBody.classList.add('hidden');
+  costDisplay.classList.remove('hidden')
+  confirmButton.addEventListener('click', resetModal);
+}
+
+function resetModal(){
+  modalBody.classList.remove('hidden');
+  costDisplay.classList.add('hidden');
   tripGrid.classList.remove('blur');
+  bookTripModal.classList.add('hidden')
+
   document.getElementById("return-date").value = ''
   document.getElementById("depart-date").value = ''
   document.getElementById("input-travelers").value = '1'
@@ -121,6 +135,6 @@ function submitTrip(){
   let destination = document.getElementById("destinations").value
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
-  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId, tripGrid, footerWelcomeMessage, footerWelcomeMessage);
+  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId, tripGrid, footerWelcomeMessage, footerExpenseAmount, receiptSub, receiptFee, receiptTotal);
   hideModal();
 }

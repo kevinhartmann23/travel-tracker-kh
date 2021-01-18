@@ -29,7 +29,7 @@ let domUpdates = {
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();
     let yearExpense = agency.calculateCustomerTotalYearExpense(traveler.id, currentYear.toString())
-    console.log(traveler, currentYear, yearExpense)
+    console.log(traveler, currentYear, yearExpense, traveler.scheduledTrips)
     welcomeElement.innerText = `Welcome, ${traveler.name}!`
     expenseElement.innerText = `$${yearExpense}`
   },
@@ -46,6 +46,12 @@ let domUpdates = {
   changeDepartDateDefault(elementId, date){
     document.getElementById(elementId).value = date;
     document.getElementById(elementId).min = date;
+  },
+
+  populateReceipt(sub, fee, total, cost){
+    sub.innerText = `Subtotal : $${cost.subtotal}`
+    fee.innerText = `Agent Fee (10%) : $${cost.agencyFee}`
+    total.innerText = `Total : $${cost.total}`
   },
 
 }
