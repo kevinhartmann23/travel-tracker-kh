@@ -5,7 +5,9 @@
 import './css/base.scss';
 import Agency from './agency.js';
 import Traveler from './traveler.js';
-import Agent from './agent.js'
+import Agent from './agent.js';
+import Trip from './trip.js'
+
 
 import fetchRequests from './fetchRequests.js';
 import domUpdates from './domUpdates.js';
@@ -51,14 +53,9 @@ bookButton.addEventListener('click', displayModal);
 dropdownBook.addEventListener('click', displayModal);
 closeModal.addEventListener('click', hideModal);
 
-let travelAgency, traveler, returnDate, departDate;
+let travelAgency, traveler, uniqueTripId;
 
 window.onload = retrieveAllData();
-
-// fetchRequests.updateData("http://localhost:3001/api/v1/trips", fetchRequests.addTripObj)
-// fetchRequests.updateData("http://localhost:3001/api/v1/destinations", fetchRequests.addDesitnationObj)
-// fetchRequests.updateData("http://localhost:3001/api/v1/updateTrip", fetchRequests.changeTripStatusObj)
-// fetchRequests.deleteSingleTrip(4)
 
 function retrieveAllData(){
   return Promise.all([
@@ -77,6 +74,7 @@ function retrieveAllData(){
         travelAgency.filterTripsByCustomerID(44),
         travelAgency.compileCustomerDestinations(44)
       );
+      uniqueTripId = data[2].trips.length + 1;
       showData();
     })
     .catch(error => console.log(error))
@@ -104,18 +102,12 @@ function hideModal(){
 }
 
 function testData(event){
-  let returnDate = document.getElementById("return-date").value
-  let departDate = document.getElementById("depart-date").value
+  let returnDate = document.getElementById("return-date").value.split('-').join('/')
+  let departDate = document.getElementById("depart-date").value.split('-').join('/')
   let numberOfTravelers = document.getElementById("input-travelers").value
   let destination = document.getElementById("destinations").value
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
-  // traveler.bookedTrip()
-    console.log("RETURN DATE",returnDate)
-    console.log("DEPART DATE",departDate)
-    console.log("TRAVELERS", numberOfTravelers)
-    console.log("DESTINATION", destination)
-    console.log("DURATION", duration)
-    hideModal()
+  let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
+  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId, tripGrid, footerWelcomeMessage, footerExpenseAmount);
+  hideModal()
 }
-
-//onChange="updateDate()"
