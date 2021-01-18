@@ -41,13 +41,15 @@
             <h1 class="modal-title">Time to Explore!</h1>
             <img class="close-button" src="./images/close.png" alt="exit" onmouseover="this.src='./images/close-hover.png'" onmouseout="this.src='./images/close.png'">
           </div>
+          <div class="cost-display">
+          </div>
           <form class="modal-body">
             <div class="calendar-wrapper">
               <label for="depart-date" aria-label="Select Departure Date" hidden>Depart</label>
-              <input type="date" id="depart-date" value="" min="2021-01-01" max="2022-12-31">
+              <input type="date" id="depart-date" value="" min="" max="2022-12-31">
               <img class="date-arrow" src="./images/arrow.png" alt="arrow pointing right">
               <label for="return-date" aria-label="Select Return Date" hidden>Return</label>
-              <input type="date" id="return-date" value="" min="2021-01-01" max="2023-03-28">
+              <input type="date" id="return-date" value="" min="" max="2023-03-28">
             </div>
             <div class="destination-wrapper">
               <label for="destinations" hidden>Select Destination</label>

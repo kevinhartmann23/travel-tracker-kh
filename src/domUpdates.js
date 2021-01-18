@@ -41,7 +41,13 @@ let domUpdates = {
       inputField.appendChild(option)
     })
   },
-};
+
+  changeDepartDateDefault(elementId, date){
+    document.getElementById(elementId).value = date;
+    document.getElementById(elementId).min = date;
+  },
+
+}
 
 
 export default domUpdates;

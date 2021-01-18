@@ -42,16 +42,19 @@ const footerExpenseAmount = document.querySelector('.expenses-cost');
 
 //BOOK TRIP MODAL
 const bookTripModal = document.querySelector('.traveler-book-modal');
-const departDateInput = document.querySelector('.depart-date');
-const returnDateInput = document.querySelector('.return-date');
+const departDateInput = document.querySelector('#depart-date');
+const returnDateInput = document.querySelector('#return-date');
 const destinationSelectInput = document.querySelector('#destinations');
 const numberTravelersInput = document.querySelector('.input-travelers');
 const submitTripInput = document.querySelector('.submit-button');
 const closeModal = document.querySelector('.close-button');
+const costDisplay = document.querySelector('.cost-display');
+const modalBody = document.querySelector('.modal-body');
 
 bookButton.addEventListener('click', displayModal);
 dropdownBook.addEventListener('click', displayModal);
 closeModal.addEventListener('click', hideModal);
+departDateInput.addEventListener('change', setReturnDateDefault);
 
 let travelAgency, traveler, uniqueTripId;
 
@@ -88,8 +91,17 @@ function showData(){
 function displayModal(){
   bookTripModal.classList.remove('hidden');
   tripGrid.classList.add('blur');
+  let todaysDate = travelAgency.convertDate(Date.now()).split('/').join('-');
+  domUpdates.changeDepartDateDefault('depart-date', todaysDate);
   domUpdates.populateDestinationOptions(travelAgency.displayDestinationNames(), destinationSelectInput)
   submitTripInput.addEventListener('click', testData);
+}
+
+function setReturnDateDefault(){
+  let departDateSelected = Date.parse(document.getElementById('depart-date').value);
+  let returnDateMinValue = travelAgency.convertDate(departDateSelected + (86400000 * 2)).split('/').join('-');
+  document.getElementById('return-date').min = returnDateMinValue;
+  document.getElementById('return-date').value = returnDateMinValue;
 }
 
 function hideModal(){
@@ -99,6 +111,8 @@ function hideModal(){
   document.getElementById("depart-date").value = ''
   document.getElementById("input-travelers").value = '1'
   document.getElementById("destinations").value = 'placeholder'
+  // domUpdates.displayCustomerTrips(traveler, agency, tripGrid)
+  // domUpdates.displayCustomerFooter(agency, traveler, footerWelcomeMessage, footerExpenseAmount)
 }
 
 function testData(event){
@@ -108,6 +122,14 @@ function testData(event){
   let destination = document.getElementById("destinations").value
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
-  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId, tripGrid, footerWelcomeMessage, footerExpenseAmount);
-  hideModal()
+  let newCost = travelAgency.calculateTripCost(newTrip.id, travelAgency.findDestinationByName(destination))
+  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId, tripGrid, footerWelcomeMessage, footerWelcomeMessage);
+  hideModal();
 }
+
+// function displayCost(cost){
+//   domUpdates.populateCostDisplay(cost, costDisplay)
+//   modalBody.classList.add('hidden')
+//   const confirmButton = document.querySelector('.confirm-button')
+//   confirmButton.addEventListener('click', hideModal);
+// }
