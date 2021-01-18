@@ -1,10 +1,10 @@
 .navigation-bar {
-  background-color: $grey;
+  background-color: $green;
   position: fixed;
   top: 0;
   display: flex;
   width: 100%;
-  height: 8vh;
+  height: 9vh;
   box-shadow: 0 1px 10px 1px $rich-black;
   justify-content: space-between;
 }
@@ -26,7 +26,7 @@
 .book-trip-button {
   background-color: $white;
   color: $rich-black;
-  border: 3px solid $green;
+  border: 2px solid $rich-black;
   font-size: 1.5em;
   font-weight: bold;
   width: 4em;
@@ -69,7 +69,7 @@
 .nav-title {
   font-size: 3.25em;
   font-family: $larger-font;
-  color: $white;
+  color: $rich-black;
 }
 
 .nav-right {
@@ -85,7 +85,7 @@
 }
 
 .dropdown-menu {
-  margin-top: .75em;
+  margin-top: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,19 +99,19 @@
 }
 
 .hamburger {
-  height: 2.5em;
-  width: 3em;
+  height: 2em;
+  width: 2em;
 }
 
 .dropdown-content {
   display: none;
   margin-top: 1em;
-  background-color: $grey;
+  background-color: $green;
   text-align: center;
   cursor: pointer;
   height: auto;
   width: auto;
-  color: $green;
+  color: $rich-black;
 }
 
 .dropdown-item {
