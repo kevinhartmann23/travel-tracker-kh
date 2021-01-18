@@ -111,8 +111,8 @@ function hideModal(){
   document.getElementById("depart-date").value = ''
   document.getElementById("input-travelers").value = '1'
   document.getElementById("destinations").value = 'placeholder'
-  domUpdates.displayCustomerTrips(traveler, agency, tripGrid)
-  domUpdates.displayCustomerFooter(agency, traveler, footerWelcomeMessage, footerExpenseAmount)
+  // domUpdates.displayCustomerTrips(traveler, agency, tripGrid)
+  // domUpdates.displayCustomerFooter(agency, traveler, footerWelcomeMessage, footerExpenseAmount)
 }
 
 function testData(event){
@@ -123,12 +123,13 @@ function testData(event){
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
   let newCost = travelAgency.calculateTripCost(newTrip.id, travelAgency.findDestinationByName(destination))
-  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId);
+  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId, tripGrid, footerWelcomeMessage, footerWelcomeMessage);
+  hideModal();
 }
 
-function displayCost(cost){
-  domUpdates.populateCostDisplay(cost, costDisplay)
-  modalBody.classList.add('hidden')
-  const confirmButton = document.querySelector('.confirm-button')
-  confirmButton.addEventListener('click', hideModal);
-}
+// function displayCost(cost){
+//   domUpdates.populateCostDisplay(cost, costDisplay)
+//   modalBody.classList.add('hidden')
+//   const confirmButton = document.querySelector('.confirm-button')
+//   confirmButton.addEventListener('click', hideModal);
+// }
