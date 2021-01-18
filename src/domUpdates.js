@@ -46,10 +46,19 @@ let domUpdates = {
     document.getElementById(elementId).value = date;
     document.getElementById(elementId).min = date;
   },
-  // 
-  // setReturnDateDefault(){
-  //   document.getElementById('return-date').min = document.getElementById('depart-date').value
-  // }
+
+  populateCostDisplay(displayArea, tripBreakDown){
+    displayArea.innerHtml =
+    `
+    <article class="receipt">
+      <h2 class="receipt-title">Please Confirm Cost To Submit Trip</h2>
+      <p class="subtotal">Subtotal: $${tripBreakDown.subtotal}</p>
+      <p class="fee">Agent Fee(10%): $${tripBreakDown.agencyFee}</p>
+      <p class="total">Total: $${tripBreakDown.total}</p>
+      <label for='confirm-buttom' class='hidden'>Click here to confirm your trip request</label>
+      <button id='confirm-button' aria-label='Search For Customers' class='confirm-button' type='button'>Confirm</button>
+    `
+  },
 };
 
 

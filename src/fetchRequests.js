@@ -76,7 +76,7 @@ let fetchRequests = {
     return option;
   },
 
-  updateData(url, option, agency, traveler, uniqueId, grid, welcome, expense){
+  updateData(url, option, agency, traveler, uniqueId){
     return fetch(url, this.createPostOption(option))
       .then(response => response.json())
       .then(message => {
@@ -98,8 +98,7 @@ let fetchRequests = {
               agency.compileCustomerDestinations(44)
             );
             uniqueId = data[2].trips.length + 1;
-            domUpdates.displayCustomerTrips(traveler, agency, grid)
-            domUpdates.displayCustomerFooter(agency, traveler, welcome, expense)
+            console.log('wait, then load')
           })
       })
       .catch(error => console.log(error))
