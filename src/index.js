@@ -72,6 +72,7 @@ closeModal.addEventListener('click', resetModal);
 departDateInput.addEventListener('change', setReturnDateDefault);
 loginButton.addEventListener('click', verifyLoginCredentials);
 submitTripInput.addEventListener('click', submitTrip);
+dropdownLogout.addEventListener('click', logout)
 
 let travelAgency, traveler, uniqueTripId;
 
@@ -116,6 +117,13 @@ function verifyLoginCredentials(){
   } else {
     incorrectPrompt.innerText = "username or password is incorrect..."
   }
+}
+
+function logout(){
+  loginDisplay.classList.remove('hidden')
+  tripGrid.classList.add('hidden')
+  navDisplay.classList.add('hidden')
+  footDisplay.classList.add('hidden')
 }
 
 function showData(){
@@ -163,6 +171,6 @@ function submitTrip(){
   let destination = document.getElementById("destinations").value
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
-  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId, tripGrid, footerWelcomeMessage, footerExpenseAmount, receiptSub, receiptFee, receiptTotal);
+  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, uniqueTripId, tripGrid, footerWelcomeMessage, footerExpenseAmount, receiptSub, receiptFee, receiptTotal);
   hideModal();
 }
