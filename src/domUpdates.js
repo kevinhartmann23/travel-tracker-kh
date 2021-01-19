@@ -67,7 +67,6 @@ let domUpdates = {
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();
     let yearExpense = agency.calculateCustomerTotalYearExpense(traveler.id, currentYear.toString())
-    console.log(traveler, currentYear, yearExpense, traveler.scheduledTrips)
     footerWelcomeMessage.innerText = `Welcome, ${traveler.name}!`
     footerExpenseAmount.innerText = `$${yearExpense}`
   },
@@ -133,9 +132,6 @@ let domUpdates = {
   displayLoginError(){
     incorrectPrompt.innerText = "username or password is incorrect..."
   },
-
-
-
 
 }
 

@@ -1,7 +1,4 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
+// CSS (SCSS) files
 import './css/base.scss';
 import Agency from './agency.js';
 import Traveler from './traveler.js';
@@ -12,7 +9,7 @@ import Trip from './trip.js'
 import fetchRequests from './fetchRequests.js';
 import domUpdates from './domUpdates.js';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
+// images
 import './images/suitcase.png'
 import './images/menu.png'
 import './images/user.png'

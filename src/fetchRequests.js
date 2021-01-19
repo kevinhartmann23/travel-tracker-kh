@@ -6,7 +6,6 @@ let fetchRequests = {
     postTripUrl:"http://localhost:3001/api/v1/trips",
     postNewDestinationUrl: "http://localhost:3001/api/v1/destinations",
     changeTripStatusUrl: "http://localhost:3001/api/v1/updateTrip",
-  // fetchRequests.deleteSingleTrip(4)
 
     getAllUserData(){
     return fetch("http://localhost:3001/api/v1/travelers")
@@ -35,35 +34,6 @@ let fetchRequests = {
     .then(data => data)
     .catch(error => console.log(error))
   },
-
-//Provided by Traveler.bookTrip()
-  // addTripObj: {
-  //   id: 5230,
-  //   userID: 23,
-  //   destinationID: 24,
-  //   travelers: 2,
-  //   date: "2020/05/23",
-  //   duration: 12,
-  //   status: "approved",
-  //   suggestedActivities: ["swim", "drink cerveza", "ride horses"],
-  // },
-
-//Provided by Agency.addNewDestination()
-  // addDesitnationObj: {
-  //   id: 5000,
-  //   destination: "BORA BORA",
-  //   estimatedLodgingCostPerDay: 400,
-  //   estimatedFlightCostPerPerson: 300,
-  //   image: "TEST",
-  //   alt: "TEST",
-  // },
-
-//Provided by Agent.changeTripStatusAndActivities()
-  // changeTripStatusObj: {
-  //   id: 3,
-  //   status: "pending",
-  //   suggestedActivities: ["PARTYYYYYYYY"],
-  // },
 
   createPostOption(data){
     let option = {
@@ -97,7 +67,6 @@ let fetchRequests = {
               agency.filterTripsByCustomerID(travelerID),
               agency.compileCustomerDestinations(travelerID)
             );
-            // uniqueTripId ++
             domUpdates.displayCustomerTrips(traveler, agency)
             domUpdates.displayCustomerFooter(agency, traveler)
             domUpdates.populateReceipt(agency.calculateTripCost(tripId))
