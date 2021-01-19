@@ -43,10 +43,10 @@
       <h1 class="nav-title">Travel Ninja</h1>
       <div class="nav-right">
         <div class="dropdown-menu">
-          <img class="hamburger" src="./images/menu.png" alt="menu">
+          <img class="hamburger" src="./images/menu.png" alt="menu" tabindex="0">
           <div class="dropdown-content">
-            <span class="dropdown-item" id="book-trip" aria-label="book-trip">book trip</span>
-            <span class="dropdown-item" id="logout" aria-label="logout">logout</span>
+            <span class="dropdown-item" id="book-trip" aria-label="book-trip" tabindex="1">book trip</span>
+            <span class="dropdown-item" id="logout" aria-label="logout" tabindex="2">logout</span>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
       <div id="book-modal" class="traveler-book-modal hidden">
           <div class="modal-header">
             <h1 class="modal-title">Time to Explore!</h1>
-            <img class="close-button" src="./images/close.png" alt="exit" onmouseover="this.src='./images/close-hover.png'" onmouseout="this.src='./images/close.png'">
+            <img class="close-button" src="./images/close.png" alt="exit" onmouseover="this.src='./images/close-hover.png'" tabindex="0" onmouseout="this.src='./images/close.png'">
           </div>
           <form class="modal-body">
             <div class="calendar-wrapper">

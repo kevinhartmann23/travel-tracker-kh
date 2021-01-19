@@ -7,21 +7,70 @@
 
 }
 
-// Large devices (laptops/desktops, 992px and up)
-@media only screen and (min-width: 992px) {
-
-}
-
-
-// Medium devices (landscape tablets, 768px and up)
-@media only screen and (min-width: 768px) {
-
-}
-
 // Small devices (portrait tablets and large phones, 600px and up)
-@media only screen and (min-width: 600px) {
+@media only screen and (max-width: 800px) {
+  .login-display {
+    background-size: cover;
+    background-position: 50% 50%;
+  }
 
+  .login-box {
+    width: 70vw;
+    height: 70vh;
+  }
 
+  .login-welcome {
+    font-size: 3em;
+    width: inherit;
+  }
+
+  .login-logo {
+    height: 12em;
+    width: 12em;
+  }
+
+  .login-wrapper {
+    height: 30vh;
+  }
+
+  .username-input {
+    height: 2em;
+    width: 15em;
+  }
+
+  .login-button {
+    width: 15em;
+    height: 2em;
+  }
+
+  .traveler-page {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(20, 30vh);
+    height: 80vh;
+    width: auto;
+  }
+
+  .dropdown-content,
+  .dropdown-menu {
+    margin-top: 2.75em;
+  }
+
+  .traveler-book-modal {
+    width: 45vh;
+    height: 25vh;
+    left: 20.5vw;
+    top: 33vh;
+  }
+
+  .modal-body,
+  .cost-display {
+    width: 96%;
+    padding: 0;
+  }
+
+  .confirm-button {
+    transform: scale(.9);
+  }
 }
 
 // Extra small devices (phones, 600px and down)
