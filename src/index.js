@@ -22,6 +22,8 @@ import './images/arrow.png'
 import './images/admin.png'
 import './images/close.png'
 import './images/close-hover.png'
+import './images/airplane.png'
+import './images/background.jpg'
 
 //NAV BAR BUTTONS
 const bookButton = document.querySelector('.book-trip-button');
