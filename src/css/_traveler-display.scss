@@ -6,7 +6,7 @@
   height: 79vh;
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(3, 30vw);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 25vh);
   justify-content: center;
   margin-top: 9.5vh;

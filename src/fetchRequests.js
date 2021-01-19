@@ -76,7 +76,7 @@ let fetchRequests = {
     return option;
   },
 
-  updateData(url, option, agency, traveler, travelerID, uniqueId, grid, welcome, expense, sub, fee, total){
+  updateData(url, option, agency, traveler, travelerID, tripId, grid, welcome, expense, sub, fee, total){
     return fetch(url, this.createPostOption(option))
       .then(response => response.json())
       .then(message => {
@@ -97,10 +97,10 @@ let fetchRequests = {
               agency.filterTripsByCustomerID(travelerID),
               agency.compileCustomerDestinations(travelerID)
             );
-            uniqueId = data[2].trips.length + 1;
+            // uniqueTripId ++
             domUpdates.displayCustomerTrips(traveler, agency, grid)
             domUpdates.displayCustomerFooter(agency, traveler, welcome, expense)
-            domUpdates.populateReceipt(sub, fee, total, agency.calculateTripCost(uniqueId))
+            domUpdates.populateReceipt(sub, fee, total, agency.calculateTripCost(tripId))
           })
       })
       .catch(error => console.log(error))

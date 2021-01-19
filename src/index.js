@@ -171,6 +171,7 @@ function submitTrip(){
   let destination = document.getElementById("destinations").value
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
-  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, uniqueTripId, tripGrid, footerWelcomeMessage, footerExpenseAmount, receiptSub, receiptFee, receiptTotal);
+  uniqueTripId ++
+  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, newTrip.id, tripGrid, footerWelcomeMessage, footerExpenseAmount, receiptSub, receiptFee, receiptTotal);
   hideModal();
 }
