@@ -76,7 +76,7 @@ let fetchRequests = {
     return option;
   },
 
-  updateData(url, option, agency, traveler, uniqueId, grid, welcome, expense){
+  updateData(url, option, agency, traveler, uniqueId, grid, welcome, expense, sub, fee, total){
     return fetch(url, this.createPostOption(option))
       .then(response => response.json())
       .then(message => {
@@ -100,6 +100,7 @@ let fetchRequests = {
             uniqueId = data[2].trips.length + 1;
             domUpdates.displayCustomerTrips(traveler, agency, grid)
             domUpdates.displayCustomerFooter(agency, traveler, welcome, expense)
+            domUpdates.populateReceipt(sub, fee, total, agency.calculateTripCost(uniqueId))
           })
       })
       .catch(error => console.log(error))

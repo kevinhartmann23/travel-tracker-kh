@@ -54,6 +54,10 @@ const submitTripInput = document.querySelector('.submit-button');
 const closeModal = document.querySelector('.close-button');
 const costDisplay = document.querySelector('.cost-display');
 const modalBody = document.querySelector('.modal-body');
+const confirmButton = document.querySelector('.confirm-button');
+const receiptSub = document.querySelector('.subtotal');
+const receiptFee = document.querySelector('.agency-fee');
+const receiptTotal = document.querySelector('.total');
 
 //LOGIN PAGE
 const loginDisplay = document.querySelector('.login-display');
@@ -64,9 +68,10 @@ const incorrectPrompt = document.querySelector('.incorrect-prompt')
 
 bookButton.addEventListener('click', displayModal);
 dropdownBook.addEventListener('click', displayModal);
-closeModal.addEventListener('click', hideModal);
+closeModal.addEventListener('click', resetModal);
 departDateInput.addEventListener('change', setReturnDateDefault);
 loginButton.addEventListener('click', verifyLoginCredentials);
+submitTripInput.addEventListener('click', submitTrip);
 
 let travelAgency, traveler, uniqueTripId;
 
@@ -90,7 +95,8 @@ function retrieveAllData(userId){
         travelAgency.compileCustomerDestinations(userId)
       );
       uniqueTripId = data[2].trips.length + 1;
-      showData();
+      domUpdates.displayCustomerTrips(traveler, travelAgency, tripGrid)
+      domUpdates.displayCustomerFooter(travelAgency, traveler, footerWelcomeMessage, footerExpenseAmount)
     })
     .catch(error => console.log(error))
 }
@@ -123,7 +129,6 @@ function displayModal(){
   let todaysDate = travelAgency.convertDate(Date.now()).split('/').join('-');
   domUpdates.changeDepartDateDefault('depart-date', todaysDate);
   domUpdates.populateDestinationOptions(travelAgency.displayDestinationNames(), destinationSelectInput)
-  submitTripInput.addEventListener('click', testData);
 }
 
 function setReturnDateDefault(){
@@ -134,31 +139,30 @@ function setReturnDateDefault(){
 }
 
 function hideModal(){
-  bookTripModal.classList.add('hidden');
+  modalBody.classList.add('hidden');
+  costDisplay.classList.remove('hidden')
+  confirmButton.addEventListener('click', resetModal);
+}
+
+function resetModal(){
+  modalBody.classList.remove('hidden');
+  costDisplay.classList.add('hidden');
   tripGrid.classList.remove('blur');
+  bookTripModal.classList.add('hidden')
+
   document.getElementById("return-date").value = ''
   document.getElementById("depart-date").value = ''
   document.getElementById("input-travelers").value = '1'
   document.getElementById("destinations").value = 'placeholder'
-  // domUpdates.displayCustomerTrips(traveler, agency, tripGrid)
-  // domUpdates.displayCustomerFooter(agency, traveler, footerWelcomeMessage, footerExpenseAmount)
 }
 
-function testData(event){
+function submitTrip(){
   let returnDate = document.getElementById("return-date").value.split('-').join('/')
   let departDate = document.getElementById("depart-date").value.split('-').join('/')
   let numberOfTravelers = document.getElementById("input-travelers").value
   let destination = document.getElementById("destinations").value
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
-  let newCost = travelAgency.calculateTripCost(newTrip.id, travelAgency.findDestinationByName(destination))
-  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId, tripGrid, footerWelcomeMessage, footerWelcomeMessage);
+  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, uniqueTripId, tripGrid, footerWelcomeMessage, footerExpenseAmount, receiptSub, receiptFee, receiptTotal);
   hideModal();
 }
-
-// function displayCost(cost){
-//   domUpdates.populateCostDisplay(cost, costDisplay)
-//   modalBody.classList.add('hidden')
-//   const confirmButton = document.querySelector('.confirm-button')
-//   confirmButton.addEventListener('click', hideModal);
-// }

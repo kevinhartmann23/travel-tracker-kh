@@ -58,12 +58,12 @@ class Agency {
     let destination = this.possibleDestinations.find(dest => dest.id === bookedTrip.destinationID)
     let costForLodging = destination.estimatedLodgingCostPerDay * bookedTrip.duration
     let costForFlights = destination.estimatedFlightCostPerPerson * bookedTrip.travelers
-    let agencyFee = 1.1
     let subtotal = costForLodging + costForFlights;
+    let agencyFee = subtotal * .1
     let costData = {
       subtotal: subtotal,
-      agencyFee: '10%',
-      total: (subtotal * agencyFee).toFixed(2),
+      agencyFee: agencyFee,
+      total: (subtotal + agencyFee).toFixed(2),
     }
     return costData;
   }
