@@ -8,7 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <nav class="navigation-bar">
+    <section class="login-display">
+      <article class="login-box">
+        <h1 class="login-welcome">Welcome to Travel Ninja</h1>
+        <img class="login-logo" src="./images/airplane.png" alt="airplane logo">
+
+        <div class="login-wrapper">
+          <p class="incorrect-prompt"></p>
+          <label for='username-input' hidden>Enter User Name</label>
+          <input id='username-input' class='username-input' type='text' placeholder='username' value=''>
+          <label for='password-input' hidden>Enter Password</label>
+          <input id='password-input' class='password-input' type='text' placeholder='password' value=''>
+          <label for="login-button" class="hidden">Click to login</label>
+          <button class="login-button" aria-label='Login' type="button">login</button>
+        </div>
+      </article>
+    </section>
+    <nav class="navigation-bar hidden">
       <div class="nav-left">
         <img class="suitcase-img" src="./images/suitcase.png" alt="suitcase">
         <label for="book-trip-button" class="hidden">Click to book a trip</label>
@@ -74,7 +90,7 @@
             <button id='confirm-button' aria-label='Search For Customers' class='confirm-button' type='button'>confirm</button>
           </div>
         </div>
-      <section class="traveler-page">
+      <section class="traveler-page hidden">
       </section>
       <section class="admin-page hidden">
         <h1 class="pending-title">pending trips</h1>
@@ -144,7 +160,7 @@
         </section>
       </section>
     </main>
-    <footer class="foot">
+    <footer class="foot hidden">
       <div class="user-wrapper">
         <img class="user footer" src="./images/user.png" alt="user icon">
         <p class="welcome-user"></p>
