@@ -1,0 +1,106 @@
+// Extra large devices (loptops/desktops, 1200px and up)
+@media only screen and (min-width: 1235px) {
+  // .traveler-page {
+  //   grid-template-columns: repeat(4, 23vw);
+  //   grid-template-rows: repeat(5, 25vh);
+  // }
+
+}
+
+// Large devices (laptops/desktops, 992px and up)
+@media only screen and (min-width: 992px) {
+
+}
+
+
+// Medium devices (landscape tablets, 768px and up)
+@media only screen and (min-width: 768px) {
+
+}
+
+// Small devices (portrait tablets and large phones, 600px and up)
+@media only screen and (min-width: 600px) {
+
+
+}
+
+// Extra small devices (phones, 600px and down)
+@media only screen and (max-width: 600px) {
+  .login-display {
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+
+  .login-box {
+    width: 80vw;
+  }
+
+  .login-welcome {
+    font-size: 1.5em;
+    width: inherit;
+  }
+
+  .nav-title {
+    display: none;
+  }
+
+  .user-wrapper {
+    height: auto;
+    width: auto;
+  }
+
+  .welcome-user {
+    width: 7em;
+    font-size: .5em;
+  }
+
+  .expenses-title {
+    width: 8em;
+    font-size: .5em;
+  }
+
+  .traveler-page {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    height: 80vh;
+    width: auto;
+  }
+
+  .dropdown-menu {
+    margin-right: 3em;
+    width: auto;
+  }
+
+  .traveler-book-modal {
+    width: 44vh;
+    height: 80vh;
+    left: 2vw;
+    top: 10vh;
+  }
+
+  .modal-body {
+    width: 91%;
+  }
+
+  .calendar-wrapper {
+    width: inherit;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .num-submit-wrapper {
+    flex-direction: column;
+    padding-right: 5em;
+    align-items: center;
+    height: 10em;
+  }
+
+  .submit-button {
+    margin-left: 3em;
+  }
+
+  .confirm-button {
+    margin-left: 0;
+  }
+
+}
