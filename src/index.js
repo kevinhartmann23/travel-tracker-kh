@@ -33,6 +33,8 @@ const searchButton = document.querySelector('.search-button');
 const searchInput = document.querySelector('.search-input');
 const dropdownBook = document.querySelector('#book-trip');
 const dropdownLogout = document.querySelector('#logout');
+const navDisplay = document.querySelector('.navigation-bar');
+const footDisplay = document.querySelector('.foot');
 
 //DISPLAY GRIDS - TRAVELER & AGENT
 const tripGrid = document.querySelector('.traveler-page');
@@ -53,16 +55,24 @@ const closeModal = document.querySelector('.close-button');
 const costDisplay = document.querySelector('.cost-display');
 const modalBody = document.querySelector('.modal-body');
 
+//LOGIN PAGE
+const loginDisplay = document.querySelector('.login-display');
+const usernameInput = document.querySelector('.username-input');
+const loginButton = document.querySelector('.login-button');
+const password = document.querySelector('.password-input');
+const incorrectPrompt = document.querySelector('.incorrect-prompt')
+
 bookButton.addEventListener('click', displayModal);
 dropdownBook.addEventListener('click', displayModal);
 closeModal.addEventListener('click', hideModal);
 departDateInput.addEventListener('change', setReturnDateDefault);
+loginButton.addEventListener('click', verifyLoginCredentials);
 
 let travelAgency, traveler, uniqueTripId;
 
-window.onload = retrieveAllData();
+// window.onload = retrieveAllData();
 
-function retrieveAllData(){
+function retrieveAllData(userId){
   return Promise.all([
     fetchRequests.getAllUserData(),
     fetchRequests.getAllDestinationData(),
@@ -75,14 +85,31 @@ function retrieveAllData(){
         data[1].destinations
       );
       traveler = new Traveler(
-        travelAgency.findCustomerbyInfo(44),
-        travelAgency.filterTripsByCustomerID(44),
-        travelAgency.compileCustomerDestinations(44)
+        travelAgency.findCustomerbyInfo(userId),
+        travelAgency.filterTripsByCustomerID(userId),
+        travelAgency.compileCustomerDestinations(userId)
       );
       uniqueTripId = data[2].trips.length + 1;
       showData();
     })
     .catch(error => console.log(error))
+}
+
+function verifyLoginCredentials(){
+  let travelerId = Number(usernameInput.value.split('traveler').join(''))
+  if(password.value === 'traveler2020' && travelerId <= 50){
+    let travelerId = usernameInput.value.split('traveler').join('')
+    retrieveAllData(Number(travelerId))
+    loginDisplay.classList.add('hidden')
+    tripGrid.classList.remove('hidden')
+    navDisplay.classList.remove('hidden')
+    footDisplay.classList.remove('hidden')
+    password.value = ""
+    usernameInput.value = ""
+    incorrectPrompt.innerText = ""
+  } else {
+    incorrectPrompt.innerText = "username or password is incorrect..."
+  }
 }
 
 function showData(){

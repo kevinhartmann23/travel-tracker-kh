@@ -24,12 +24,12 @@
 
 .login-welcome {
   font-size: 1.75em;
-  // height: 2em;
   padding: .5em;
   text-align: center;
-  background-color: $green;
+  color: $green;
+  // background-color: $green;
   width: 23vw;
-  box-shadow: 0 3px 5px -1px $rich-black;
+  // box-shadow: 0 3px 5px -1px $rich-black;
   border-top-left-radius: .125em;
   border-top-right-radius: .125em;
 }
@@ -49,14 +49,19 @@
 }
 
 .username-input {
-  height: 1.5em;
+  height: 1.25em;
   font-size: 1.5em;
   border: 1px solid $green;
   border-radius: .25em;
+  background:rgba(255,255,255, .2);
+}
+
+.password-input {
+  @extend .username-input;
 }
 
 .login-button {
   @extend .approve-button;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   background-color: $green;
 }
