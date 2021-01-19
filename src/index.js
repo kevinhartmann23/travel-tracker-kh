@@ -1,7 +1,4 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
+// CSS (SCSS) files
 import './css/base.scss';
 import Agency from './agency.js';
 import Traveler from './traveler.js';
@@ -12,7 +9,7 @@ import Trip from './trip.js'
 import fetchRequests from './fetchRequests.js';
 import domUpdates from './domUpdates.js';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
+// images
 import './images/suitcase.png'
 import './images/menu.png'
 import './images/user.png'
@@ -27,44 +24,19 @@ import './images/background.jpg'
 
 //NAV BAR BUTTONS
 const bookButton = document.querySelector('.book-trip-button');
-const bookBox = document.querySelector('.nav-left')
-const searchBox = document.querySelector('.search-box');
-const searchButton = document.querySelector('.search-button');
-const searchInput = document.querySelector('.search-input');
 const dropdownBook = document.querySelector('#book-trip');
 const dropdownLogout = document.querySelector('#logout');
-const navDisplay = document.querySelector('.navigation-bar');
-const footDisplay = document.querySelector('.foot');
-
-//DISPLAY GRIDS - TRAVELER & AGENT
-const tripGrid = document.querySelector('.traveler-page');
-const adminPendingGrid = document.querySelector('.pending-trips');
-const adminApprovedGrid = document.querySelector('.approved-trips');
-const adminDepartedGrid = document.querySelector('.departed-trips');
-const footerWelcomeMessage = document.querySelector('.welcome-user');
-const footerExpenseAmount = document.querySelector('.expenses-cost');
 
 //BOOK TRIP MODAL
-const bookTripModal = document.querySelector('.traveler-book-modal');
 const departDateInput = document.querySelector('#depart-date');
-const returnDateInput = document.querySelector('#return-date');
-const destinationSelectInput = document.querySelector('#destinations');
-const numberTravelersInput = document.querySelector('.input-travelers');
 const submitTripInput = document.querySelector('.submit-button');
 const closeModal = document.querySelector('.close-button');
-const costDisplay = document.querySelector('.cost-display');
-const modalBody = document.querySelector('.modal-body');
 const confirmButton = document.querySelector('.confirm-button');
-const receiptSub = document.querySelector('.subtotal');
-const receiptFee = document.querySelector('.agency-fee');
-const receiptTotal = document.querySelector('.total');
 
 //LOGIN PAGE
-const loginDisplay = document.querySelector('.login-display');
 const usernameInput = document.querySelector('.username-input');
 const loginButton = document.querySelector('.login-button');
 const password = document.querySelector('.password-input');
-const incorrectPrompt = document.querySelector('.incorrect-prompt')
 
 bookButton.addEventListener('click', displayModal);
 dropdownBook.addEventListener('click', displayModal);
@@ -75,8 +47,6 @@ submitTripInput.addEventListener('click', submitTrip);
 dropdownLogout.addEventListener('click', logout)
 
 let travelAgency, traveler, uniqueTripId;
-
-// window.onload = retrieveAllData();
 
 function retrieveAllData(userId){
   return Promise.all([
@@ -96,8 +66,8 @@ function retrieveAllData(userId){
         travelAgency.compileCustomerDestinations(userId)
       );
       uniqueTripId = data[2].trips.length + 1;
-      domUpdates.displayCustomerTrips(traveler, travelAgency, tripGrid)
-      domUpdates.displayCustomerFooter(travelAgency, traveler, footerWelcomeMessage, footerExpenseAmount)
+      domUpdates.displayCustomerTrips(traveler, travelAgency)
+      domUpdates.displayCustomerFooter(travelAgency, traveler)
     })
     .catch(error => console.log(error))
 }
@@ -107,36 +77,21 @@ function verifyLoginCredentials(){
   if(password.value === 'traveler2020' && travelerId <= 50){
     let travelerId = usernameInput.value.split('traveler').join('')
     retrieveAllData(Number(travelerId))
-    loginDisplay.classList.add('hidden')
-    tripGrid.classList.remove('hidden')
-    navDisplay.classList.remove('hidden')
-    footDisplay.classList.remove('hidden')
-    password.value = ""
-    usernameInput.value = ""
-    incorrectPrompt.innerText = ""
+    domUpdates.changeAfterLogin();
   } else {
-    incorrectPrompt.innerText = "username or password is incorrect..."
+    domUpdates.displayLoginError();
   }
 }
 
 function logout(){
-  loginDisplay.classList.remove('hidden')
-  tripGrid.classList.add('hidden')
-  navDisplay.classList.add('hidden')
-  footDisplay.classList.add('hidden')
-}
-
-function showData(){
-  domUpdates.displayCustomerTrips(traveler, travelAgency, tripGrid)
-  domUpdates.displayCustomerFooter(travelAgency, traveler, footerWelcomeMessage, footerExpenseAmount)
+  domUpdates.changeAfterLogout();
 }
 
 function displayModal(){
-  bookTripModal.classList.remove('hidden');
-  tripGrid.classList.add('blur');
+  domUpdates.displayModalHelper();
   let todaysDate = travelAgency.convertDate(Date.now()).split('/').join('-');
   domUpdates.changeDepartDateDefault('depart-date', todaysDate);
-  domUpdates.populateDestinationOptions(travelAgency.displayDestinationNames(), destinationSelectInput)
+  domUpdates.populateDestinationOptions(travelAgency.displayDestinationNames())
 }
 
 function setReturnDateDefault(){
@@ -147,21 +102,12 @@ function setReturnDateDefault(){
 }
 
 function hideModal(){
-  modalBody.classList.add('hidden');
-  costDisplay.classList.remove('hidden')
+  domUpdates.hideModalHelper()
   confirmButton.addEventListener('click', resetModal);
 }
 
 function resetModal(){
-  modalBody.classList.remove('hidden');
-  costDisplay.classList.add('hidden');
-  tripGrid.classList.remove('blur');
-  bookTripModal.classList.add('hidden')
-
-  document.getElementById("return-date").value = ''
-  document.getElementById("depart-date").value = ''
-  document.getElementById("input-travelers").value = '1'
-  document.getElementById("destinations").value = 'placeholder'
+  domUpdates.resetModalHelper();
 }
 
 function submitTrip(){
@@ -172,6 +118,6 @@ function submitTrip(){
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
   uniqueTripId ++
-  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, newTrip.id, tripGrid, footerWelcomeMessage, footerExpenseAmount, receiptSub, receiptFee, receiptTotal);
+  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, newTrip.id);
   hideModal();
 }
