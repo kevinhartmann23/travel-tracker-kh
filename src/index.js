@@ -22,29 +22,13 @@ import './images/close-hover.png'
 import './images/airplane.png'
 import './images/background.jpg'
 
-//NAV BAR BUTTONS
-const bookButton = document.querySelector('.book-trip-button');
-const dropdownBook = document.querySelector('#book-trip');
-const dropdownLogout = document.querySelector('#logout');
-
-//BOOK TRIP MODAL
-const departDateInput = document.querySelector('#depart-date');
-const submitTripInput = document.querySelector('.submit-button');
-const closeModal = document.querySelector('.close-button');
-const confirmButton = document.querySelector('.confirm-button');
-
-//LOGIN PAGE
-const usernameInput = document.querySelector('.username-input');
-const loginButton = document.querySelector('.login-button');
-const password = document.querySelector('.password-input');
-
-bookButton.addEventListener('click', displayModal);
-dropdownBook.addEventListener('click', displayModal);
-closeModal.addEventListener('click', resetModal);
-departDateInput.addEventListener('change', setReturnDateDefault);
-loginButton.addEventListener('click', verifyLoginCredentials);
-submitTripInput.addEventListener('click', submitTrip);
-dropdownLogout.addEventListener('click', logout)
+domUpdates.bookButton.addEventListener('click', displayModal);
+domUpdates.dropdownBook.addEventListener('click', displayModal);
+domUpdates.closeModal.addEventListener('click', resetModal);
+domUpdates.departDateInput.addEventListener('change', setReturnDateDefault);
+domUpdates.loginButton.addEventListener('click', verifyLoginCredentials);
+domUpdates.submitTripInput.addEventListener('click', submitTrip);
+domUpdates.dropdownLogout.addEventListener('click', logout)
 
 let travelAgency, traveler, uniqueTripId;
 
@@ -73,9 +57,8 @@ function retrieveAllData(userId){
 }
 
 function verifyLoginCredentials(){
-  let travelerId = Number(usernameInput.value.split('traveler').join(''))
-  if(password.value === 'traveler2020' && travelerId <= 50){
-    let travelerId = usernameInput.value.split('traveler').join('')
+  let travelerId = Number(domUpdates.usernameInput.value.split('traveler').join(''))
+  if(domUpdates.password.value === 'traveler2020' && travelerId <= 50){
     retrieveAllData(Number(travelerId))
     domUpdates.changeAfterLogin();
   } else {
@@ -103,7 +86,7 @@ function setReturnDateDefault(){
 
 function hideModal(){
   domUpdates.hideModalHelper()
-  confirmButton.addEventListener('click', resetModal);
+  domUpdates.confirmButton.addEventListener('click', resetModal);
 }
 
 function resetModal(){
@@ -118,6 +101,6 @@ function submitTrip(){
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
   uniqueTripId ++
-  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, newTrip.id);
+  let updates = fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, newTrip.id);
   hideModal();
 }
