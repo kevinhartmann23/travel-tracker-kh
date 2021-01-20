@@ -138,8 +138,6 @@ You will be greeted with a login page. The login page was designed to be clean a
 `username: traveler[id]` _please replace `[id]` with any number `1-50`_
 `password: traveler2020`
 
-![giphy1]()
-
 Great! Now let's explore.
 
 ### Traveler Dashboard
