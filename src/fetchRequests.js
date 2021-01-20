@@ -3,39 +3,39 @@ import Traveler from './traveler.js';
 import domUpdates from './domUpdates.js';
 
 let fetchRequests = {
-    postTripUrl:"http://localhost:3001/api/v1/trips",
-    postNewDestinationUrl: "http://localhost:3001/api/v1/destinations",
-    changeTripStatusUrl: "http://localhost:3001/api/v1/updateTrip",
+  postTripUrl: "http://localhost:3001/api/v1/trips",
+  postNewDestinationUrl: "http://localhost:3001/api/v1/destinations",
+  changeTripStatusUrl: "http://localhost:3001/api/v1/updateTrip",
 
-    getAllUserData(){
+  getAllUserData() {
     return fetch("http://localhost:3001/api/v1/travelers")
-    .then(response => response.json())
-    .then(data => data)
-    .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(data => data)
+      .catch(error => console.log(error))
   },
 
-    getSingleUserData(id){
+  getSingleUserData(id) {
     return fetch(`http://localhost:3001/api/v1/travelers/${id}`)
-    .then(response => response.json())
-    .then(data => data)
-    .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(data => data)
+      .catch(error => console.log(error))
   },
 
-    getAllDestinationData(){
+  getAllDestinationData() {
     return fetch("http://localhost:3001/api/v1/destinations")
-    .then(response => response.json())
-    .then(data => data)
-    .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(data => data)
+      .catch(error => console.log(error))
   },
 
-    getAllTripData(){
+  getAllTripData() {
     return fetch("http://localhost:3001/api/v1/trips")
-    .then(response => response.json())
-    .then(data => data)
-    .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(data => data)
+      .catch(error => console.log(error))
   },
 
-  createPostOption(data){
+  createPostOption(data) {
     let option = {
       method: "POST",
       headers: {
@@ -46,7 +46,7 @@ let fetchRequests = {
     return option;
   },
 
-  updateData(url, option, agency, traveler, travelerID, tripId){
+  updateData(url, option, agency, traveler, travelerID, tripId) {
     return fetch(url, this.createPostOption(option))
       .then(response => response.json())
       .then(message => {
@@ -75,7 +75,7 @@ let fetchRequests = {
       .catch(error => console.log(error))
   },
 
-  deleteSingleTrip(id){
+  deleteSingleTrip(id) {
     return fetch(`http://localhost:3001/api/v1/trips/${id}`, {method: "DELETE"})
       .then(response => response.json())
       .then(message => console.log(message))

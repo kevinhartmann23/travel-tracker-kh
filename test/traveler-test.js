@@ -15,7 +15,10 @@ let newTraveler;
 describe('Traveler', () => {
   beforeEach('instantiate a new traveler class', () => {
     travelAgency = new Agency(travelers, trips, destinations)
-    newTraveler = new Traveler(travelAgency.findCustomerbyInfo(2), travelAgency.filterTripsByCustomerID(2))
+    newTraveler = new Traveler(
+      travelAgency.findCustomerbyInfo(2),
+      travelAgency.filterTripsByCustomerID(2)
+    )
   });
 
   it('should store a specific travelers id', () => {

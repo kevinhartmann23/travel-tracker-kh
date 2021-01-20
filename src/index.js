@@ -2,7 +2,6 @@
 import './css/base.scss';
 import Agency from './agency.js';
 import Traveler from './traveler.js';
-import Agent from './agent.js';
 import Trip from './trip.js'
 
 
@@ -32,7 +31,7 @@ domUpdates.dropdownLogout.addEventListener('click', logout)
 
 let travelAgency, traveler, uniqueTripId;
 
-function retrieveAllData(userId){
+function retrieveAllData(userId) {
   return Promise.all([
     fetchRequests.getAllUserData(),
     fetchRequests.getAllDestinationData(),
@@ -56,9 +55,9 @@ function retrieveAllData(userId){
     .catch(error => console.log(error))
 }
 
-function verifyLoginCredentials(){
+function verifyLoginCredentials() {
   let travelerId = Number(domUpdates.usernameInput.value.split('traveler').join(''))
-  if(domUpdates.password.value === 'traveler2020' && travelerId <= 50){
+  if (domUpdates.password.value === 'traveler2020' && travelerId <= 50){
     retrieveAllData(Number(travelerId))
     domUpdates.changeAfterLogin();
   } else {
@@ -66,34 +65,34 @@ function verifyLoginCredentials(){
   }
 }
 
-function logout(){
+function logout() {
   domUpdates.changeAfterLogout();
 }
 
-function displayModal(){
+function displayModal() {
   domUpdates.displayModalHelper();
   let todaysDate = travelAgency.convertDate(Date.now()).split('/').join('-');
   domUpdates.changeDepartDateDefault('depart-date', todaysDate);
   domUpdates.populateDestinationOptions(travelAgency.displayDestinationNames())
 }
 
-function setReturnDateDefault(){
+function setReturnDateDefault() {
   let departDateSelected = Date.parse(document.getElementById('depart-date').value);
   let returnDateMinValue = travelAgency.convertDate(departDateSelected + (86400000 * 2)).split('/').join('-');
   document.getElementById('return-date').min = returnDateMinValue;
   document.getElementById('return-date').value = returnDateMinValue;
 }
 
-function hideModal(){
+function hideModal() {
   domUpdates.hideModalHelper()
   domUpdates.confirmButton.addEventListener('click', resetModal);
 }
 
-function resetModal(){
+function resetModal() {
   domUpdates.resetModalHelper();
 }
 
-function submitTrip(){
+function submitTrip() {
   let returnDate = document.getElementById("return-date").value.split('-').join('/')
   let departDate = document.getElementById("depart-date").value.split('-').join('/')
   let numberOfTravelers = document.getElementById("input-travelers").value
@@ -101,6 +100,6 @@ function submitTrip(){
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
   uniqueTripId ++
-  let updates = fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, newTrip.id);
+  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, newTrip.id);
   hideModal();
 }
