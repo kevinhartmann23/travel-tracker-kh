@@ -50,7 +50,6 @@ let fetchRequests = {
     return fetch(url, this.createPostOption(option))
       .then(response => response.json())
       .then(message => {
-        console.log(message)
         Promise.all([
           fetchRequests.getAllUserData(),
           fetchRequests.getAllDestinationData(),

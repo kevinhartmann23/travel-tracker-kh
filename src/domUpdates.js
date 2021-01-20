@@ -28,6 +28,9 @@ const closeModal = document.querySelector('.close-button');
 const costDisplay = document.querySelector('.cost-display');
 const modalBody = document.querySelector('.modal-body');
 const confirmButton = document.querySelector('.confirm-button');
+const receiptSub = document.querySelector('.subtotal')
+const receiptFee = document.querySelector('.agency-fee')
+const receiptTotal = document.querySelector('.total')
 
 //LOGIN PAGE
 const loginDisplay = document.querySelector('.login-display');
@@ -37,6 +40,16 @@ const password = document.querySelector('.password-input');
 const incorrectPrompt = document.querySelector('.incorrect-prompt');
 
 let domUpdates = {
+  bookButton,
+  dropdownBook,
+  dropdownLogout,
+  departDateInput,
+  submitTripInput,
+  closeModal,
+  confirmButton,
+  usernameInput,
+  loginButton,
+  password,
 
   displayCustomerTrips(traveler, agency){
     tripGrid.innerHTML = '';
