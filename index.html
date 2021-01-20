@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='UTF-8'>
+    <title>Travel Tracker</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <section class="login-display">
+      <article class="login-box">
+        <h1 class="login-welcome">Welcome to Travel Ninja</h1>
+        <img class="login-logo" src="./images/airplane.png" alt="airplane logo">
+
+        <div class="login-wrapper">
+          <p class="incorrect-prompt"></p>
+          <label for='username-input' hidden>Enter User Name</label>
+          <input id='username-input' class='username-input' type='text' placeholder='username' value=''>
+          <label for='password-input' hidden>Enter Password</label>
+          <input id='password-input' class='password-input' type='text' placeholder='password' value=''>
+          <label for="login-button" class="hidden">Click to login</label>
+          <button class="login-button" aria-label='Login' type="button">login</button>
+        </div>
+      </article>
+    </section>
+    <nav class="navigation-bar hidden">
+      <div class="nav-left">
+        <img class="suitcase-img" src="./images/suitcase.png" alt="suitcase">
+        <label for="book-trip-button" class="hidden">Click to book a trip</label>
+        <button class="book-trip-button" aria-label='Book A Trip' type="button">book</button>
+      </div>
+      <div class="search-box hidden">
+        <form class='search-bar'>
+          <label for='search-button' class='hidden'>Click here to search for customers</label>
+          <button id='search-button' aria-label='Search For Customers' class='search-button' type='button'>
+            <img class="user search" src="./images/user.png" alt="search user">
+          </button>
+          <label for='search-input' hidden>Search For Customers</label>
+          <input id='search-input' class='search-input' type='text' placeholder='by name...' value=''>
+          </form>
+      </div>
+      <h1 class="nav-title">Travel Ninja</h1>
+      <div class="nav-right">
+        <div class="dropdown-menu">
+          <img class="hamburger" src="./images/menu.png" alt="menu" tabindex="0">
+          <div class="dropdown-content">
+            <span class="dropdown-item" id="book-trip" aria-label="book-trip" tabindex="1">book trip</span>
+            <span class="dropdown-item" id="logout" aria-label="logout" tabindex="2">logout</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div id="book-modal" class="traveler-book-modal hidden">
+          <div class="modal-header">
+            <h1 class="modal-title">Time to Explore!</h1>
+            <img class="close-button" src="./images/close.png" alt="exit" onmouseover="this.src='./images/close-hover.png'" tabindex="0" onmouseout="this.src='./images/close.png'">
+          </div>
+          <form class="modal-body">
+            <div class="calendar-wrapper">
+              <label for="depart-date" aria-label="Select Departure Date" hidden>Depart</label>
+              <input type="date" id="depart-date" value="" min="" max="2022-12-31">
+              <img class="date-arrow" src="./images/arrow.png" alt="arrow pointing right">
+              <label for="return-date" aria-label="Select Return Date" hidden>Return</label>
+              <input type="date" id="return-date" value="" min="" max="2023-03-28">
+            </div>
+            <div class="destination-wrapper">
+              <label for="destinations" hidden>Select Destination</label>
+              <select id="destinations" name="destinations" placeholder="Select Destination">
+                <option value="placeholder">Select Your Destination</option>
+              </select>
+            </div>
+            <div class="num-submit-wrapper">
+              <div class="modal-travelers-wrapper">
+                <img class="person-icon" src="./images/person-grey.png" alt="suitcase">
+                <label for="input-travelers" aria-label="Select Number of Travelers"># of Travelers</label>
+                <input id="input-travelers" type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-travelers">
+              </div>
+              <label for='submit-buttom' class='hidden'>Click here to submit your trip request</label>
+              <button id='submit-button' aria-label='Search For Customers' class='submit-button' type='button'>Submit</button>
+            </div>
+          </form>
+          <div class="cost-display hidden">
+            <h2 class="receipt-title">Receipt</h2>
+            <p class="subtotal">Subtotal: $1500</p>
+            <p class="agency-fee">Fee(10%): $150</p>
+            <p class="total">Total: $1650</p>
+            <label for='confirm-buttom' class='hidden'>Click here to confirm your trip request</label>
+            <button id='confirm-button' aria-label='Search For Customers' class='confirm-button' type='button'>confirm</button>
+          </div>
+        </div>
+      <section class="traveler-page hidden">
+      </section>
+      <section class="admin-page hidden">
+        <h1 class="pending-title">pending trips</h1>
+        <h1 class="approved-title">approved trips</h1>
+        <h1 class="departed-title">departed trips</h1>
+        <section class="pending-trips">
+        </section>
+        <section class="approved-trips">
+        </section>
+        <section class="departed-trips">
+        </section>
+      </section>
+    </main>
+    <footer class="foot hidden">
+      <div class="user-wrapper">
+        <img class="user footer" src="./images/user.png" alt="user icon">
+        <p class="welcome-user"></p>
+      </div>
+      <div class="traveler-expenses">
+        <p class="expenses-title">This Year's Trip Expenses:<p>
+        <p class="expenses-cost"></p>
+      </div>
+    </footer>
+  <script src="main.bundle.js"></script></body>
+</html>
