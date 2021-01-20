@@ -6,7 +6,7 @@
 
 
 ### Deployed Site
-[visit TravelNinja here]()
+[visit TravelNinja here](https://kevinhartmann23.github.io/travel-tracker-kh/)
 
 
 ## Table of Contents
@@ -27,7 +27,7 @@ The base functionality of this project was to create an interface where a travel
 - Local Server Api (fetch requests)
 
 ## Setup Instructions
-If you would like to simply view the current working version, just visit the [deployed site]()!
+If you would like to simply view the current working version, just visit the [deployed site](https://kevinhartmann23.github.io/travel-tracker-kh/)!
 
 If you would like to contribute, please request contributor access and follow the steps below:
 
