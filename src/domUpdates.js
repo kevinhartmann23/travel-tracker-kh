@@ -51,7 +51,7 @@ let domUpdates = {
   loginButton,
   password,
 
-  displayCustomerTrips(traveler, agency){
+  displayCustomerTrips(traveler, agency) {
     tripGrid.innerHTML = '';
     traveler.scheduledTrips.forEach(trip => {
       let destination = traveler.scheduleDestinations.find(dest => trip.destinationID === dest.id)
@@ -76,7 +76,7 @@ let domUpdates = {
     })
   },
 
-  displayCustomerFooter(agency, traveler){
+  displayCustomerFooter(agency, traveler) {
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();
     let yearExpense = agency.calculateCustomerTotalYearExpense(traveler.id, currentYear.toString())
@@ -84,7 +84,7 @@ let domUpdates = {
     footerExpenseAmount.innerText = `$${yearExpense}`
   },
 
-  populateDestinationOptions(destinationNames){
+  populateDestinationOptions(destinationNames) {
     destinationNames.forEach(name => {
       let option = document.createElement("option")
       option.value = name;
@@ -93,28 +93,28 @@ let domUpdates = {
     })
   },
 
-  changeDepartDateDefault(elementId, date){
+  changeDepartDateDefault(elementId, date) {
     document.getElementById(elementId).value = date;
     document.getElementById(elementId).min = date;
   },
 
-  populateReceipt(cost){
+  populateReceipt(cost) {
     receiptSub.innerText = `Subtotal : $${cost.subtotal}`
     receiptFee.innerText = `Agent Fee (10%) : $${cost.agencyFee}`
     receiptTotal.innerText = `Total : $${cost.total}`
   },
 
-  hideModalHelper(){
+  hideModalHelper() {
     modalBody.classList.add('hidden');
     costDisplay.classList.remove('hidden')
   },
 
-  displayModalHelper(){
+  displayModalHelper() {
     bookTripModal.classList.remove('hidden');
     tripGrid.classList.add('blur');
   },
 
-  resetModalHelper(){
+  resetModalHelper() {
     modalBody.classList.remove('hidden');
     tripGrid.classList.remove('blur');
     costDisplay.classList.add('hidden');
@@ -125,7 +125,7 @@ let domUpdates = {
     document.getElementById("destinations").value = 'placeholder'
   },
 
-  changeAfterLogin(){
+  changeAfterLogin() {
     loginDisplay.classList.add('hidden')
     tripGrid.classList.remove('hidden')
     navDisplay.classList.remove('hidden')
@@ -135,14 +135,14 @@ let domUpdates = {
     incorrectPrompt.innerText = ""
   },
 
-  changeAfterLogout(){
+  changeAfterLogout() {
     loginDisplay.classList.remove('hidden')
     tripGrid.classList.add('hidden')
     navDisplay.classList.add('hidden')
     footDisplay.classList.add('hidden')
   },
 
-  displayLoginError(){
+  displayLoginError() {
     incorrectPrompt.innerText = "username or password is incorrect..."
   },
 

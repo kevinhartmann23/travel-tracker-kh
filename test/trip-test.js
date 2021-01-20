@@ -4,7 +4,6 @@ import Trip from '../src/trip.js'
 
 import {
   travelers,
-  trips,
   destinations
 } from './test-data.js'
 
@@ -16,7 +15,14 @@ describe('Trip', () => {
   beforeEach('instantiate a new agency class', () => {
     destination = destinations[4];
     traveler = travelers[0];
-    newTrip = new Trip(travelers.length, traveler.id, destination.id, 10, "2021/01/30", 6)
+    newTrip = new Trip(
+      travelers.length,
+      traveler.id,
+      destination.id,
+      10,
+      "2021/01/30",
+      6
+    )
   });
 
   it('should store a unique id', () => {
