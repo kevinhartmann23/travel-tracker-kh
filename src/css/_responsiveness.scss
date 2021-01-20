@@ -45,7 +45,7 @@
 
   .traveler-page {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(20, 30vh);
+    grid-template-rows: repeat(auto, 30vh);
     height: 80vh;
     width: auto;
   }
