@@ -101,6 +101,6 @@ function submitTrip(){
   let duration = travelAgency.determineDurationByEndDate(departDate, returnDate);
   let newTrip = new Trip(uniqueTripId, traveler.id, travelAgency.findDestinationByName(destination), numberOfTravelers, departDate, duration)
   uniqueTripId ++
-  fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, newTrip.id);
+  let updates = fetchRequests.updateData(fetchRequests.postTripUrl, newTrip, travelAgency, traveler, traveler.id, newTrip.id);
   hideModal();
 }

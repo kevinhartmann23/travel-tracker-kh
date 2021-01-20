@@ -53,7 +53,8 @@ let fetchRequests = {
         Promise.all([
           fetchRequests.getAllUserData(),
           fetchRequests.getAllDestinationData(),
-          fetchRequests.getAllTripData()
+          fetchRequests.getAllTripData(),
+          fetchRequests.getSingleUserData(travelerID)
         ])
           .then(data => {
             agency = new Agency(
@@ -62,7 +63,7 @@ let fetchRequests = {
               data[1].destinations
             );
             traveler = new Traveler(
-              agency.findCustomerbyInfo(travelerID),
+              data[3],
               agency.filterTripsByCustomerID(travelerID),
               agency.compileCustomerDestinations(travelerID)
             );
